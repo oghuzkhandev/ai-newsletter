@@ -1,19 +1,41 @@
 import { NextResponse } from "next/server";
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import createIntlMiddleware from "next-intl/middleware";
+
+const intlMiddleware = createIntlMiddleware({
+  locales: ["en", "tr"],
+  defaultLocale: "en",
+  localePrefix: "always"
+});
 
 const isProtectedRoute = createRouteMatcher([
+  "/dashboard(.*)",
   "/app(.*)",
   "/api/internal(.*)",
-  "/api/admin(.*)",
-  "/dashboard(.*)",
+  "/api/admin(.*)"
+]);
+
+const isPublicApiRoute = createRouteMatcher([
+  "/api/webhooks(.*)",
+  "/api/health(.*)"
+]);
+
+const isQstashRoute = createRouteMatcher([
+  "/api/cron(.*)"
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
-  const { userId } = await auth();
-
   const pathname = req.nextUrl.pathname;
 
-  if (pathname.startsWith("/api/webhooks/stripe")) {
+  if (isQstashRoute(req)) {
+    return NextResponse.next();
+  }
+
+  if (isPublicApiRoute(req)) {
+    return NextResponse.next();
+  }
+
+  if (pathname.startsWith("/api")) {
     return NextResponse.next();
   }
 
@@ -21,27 +43,12 @@ export default clerkMiddleware(async (auth, req) => {
     await auth.protect();
   }
 
-  if (pathname.startsWith("/api/gateway")) {
-    const requestHeaders = new Headers(req.headers);
-
-    if (userId) {
-      requestHeaders.set("x-user-id", userId);
-    }
-    return NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
-  }
-  return NextResponse.next();
+  return intlMiddleware(req);
 });
 
 export const config = {
   matcher: [
-    // Next.js internalleri ve statik dosyaları atla
-    // (Clerk dokümanındaki önerilen pattern) :contentReference[oaicite:1]{index=1}
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    // API & tRPC için her zaman çalışsın
-    "/(api|trpc)(.*)",
-  ],
+    "/((?!_next|.*\\..*).*)",
+    "/(api|trpc)(.*)"
+  ]
 };

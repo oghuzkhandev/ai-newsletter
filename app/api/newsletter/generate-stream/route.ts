@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
     console.log("User ID:", user.id);
     console.log("Settings found:", !!settings);
 
-    // Article'ları getir
+
     const articles = await prepareFeedsAndArticles({
       feedIds,
       startDate: new Date(startDate),
@@ -83,7 +83,7 @@ export async function POST(req: NextRequest) {
     console.log("Starting AI generation...");
 
     const result = streamObject({
-      model: openai("gpt-4o-mini"),
+      model: openai("gpt-4o"),
       schema: NewsletterSchema,
       prompt,
       onFinish: ({ object, error }) => {

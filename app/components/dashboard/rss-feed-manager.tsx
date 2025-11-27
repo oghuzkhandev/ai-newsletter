@@ -1,5 +1,5 @@
 import { auth } from "@clerk/nextjs/server";
-import { ExternalLink, Plus } from "lucide-react";
+import { ExternalLink, Plus, Rss } from "lucide-react";
 import { getRssFeedsByUserId } from "@/actions/rss-feed";
 import { upsertUserFromClerk } from "@/actions/user";
 import { Button } from "@/components/ui/button";
@@ -27,7 +27,7 @@ interface RssFeed {
 export async function RssFeedManager() {
   const { userId, has } = await auth();
   const isPro = await has({ plan: "pro" });
-  const feedLimit = isPro ? Infinity : 3;
+  const feedLimit = isPro ? 3 : 1;
 
   const user = await upsertUserFromClerk(userId!);
   const feeds = (await getRssFeedsByUserId(user.id)) as RssFeed[];
@@ -37,8 +37,14 @@ export async function RssFeedManager() {
       <CardHeader>
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="min-w-0 flex-1">
-            <CardTitle className="text-2xl">RSS Feeds</CardTitle>
-            <CardDescription className="text-base">
+            <CardTitle className="text-2xl flex items-center gap-3">
+              {" "}
+              <div className="w-10 h-10 rounded-xl bg-neutral-200 flex items-center justify-center shadow-md">
+                <Rss />
+              </div>
+              RSS Feeds
+            </CardTitle>
+            <CardDescription className="text-base mt-2">
               Manage your RSS feed sources{" "}
               {!isPro && `(${feeds.length}/${feedLimit} used)`}
             </CardDescription>
@@ -61,7 +67,7 @@ export async function RssFeedManager() {
               feedLimit={feedLimit}
               isPro={isPro}
               trigger={
-                <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white">
+                <Button className="w-full">
                   <Plus className="h-4 w-4 mr-2" />
                   Add Your First Feed
                 </Button>

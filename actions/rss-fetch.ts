@@ -10,6 +10,20 @@ import {
 import { bulkCreateRssArticles } from "./rss-article";
 import { updateFeedLastFetched } from "./rss-feed";
 
+function detectFeedCategory(url: string, metadata: any): string {
+  const u = url.toLowerCase();
+  const t = (metadata.title || "").toLowerCase();
+
+  if (u.includes("spor") || t.includes("spor")) return "Sports";
+  if (u.includes("sport")) return "Sports";
+  if (u.includes("science") || u.includes("bilim")) return "Science";
+  if (u.includes("tech") || u.includes("technology")) return "Technology";
+  if (u.includes("economy") || u.includes("finance") || t.includes("ekonomi"))
+    return "Economy";
+
+  return "General";
+}
+
 export async function validateAndAddFeed(userId: string, url: string) {
   return wrapDatabaseOperation(async () => {
     const isValid = await validateFeedUrl(url);
@@ -21,11 +35,13 @@ export async function validateAndAddFeed(userId: string, url: string) {
       data: {
         userId,
         url,
+        category: detectFeedCategory(url, {}),
       },
     });
 
     try {
       const result = await fetchAndStoreFeed(feed.id);
+
       await prisma.rssFeed.update({
         where: { id: feed.id },
         data: {
@@ -34,6 +50,7 @@ export async function validateAndAddFeed(userId: string, url: string) {
           link: result.metadata.link,
           imageUrl: result.metadata.imageUrl,
           language: result.metadata.language,
+          category: detectFeedCategory(url, result.metadata),
         },
       });
 
@@ -42,8 +59,8 @@ export async function validateAndAddFeed(userId: string, url: string) {
         articlesCreated: result.created,
         articlesSkipped: result.skipped,
       };
-    } catch (fetchError) {
-      console.error("Failed to fetch initial articles:", fetchError);
+    } catch (err) {
+      console.error("Failed to fetch initial articles:", err);
       return {
         feed,
         articlesCreated: 0,
@@ -60,9 +77,7 @@ export async function fetchAndStoreFeed(feedId: string) {
       where: { id: feedId },
     });
 
-    if (!feed) {
-      throw new Error(`Feed with ID ${feedId} not found`);
-    }
+    if (!feed) throw new Error(`Feed with ID ${feedId} not found`);
 
     const { metadata, articles } = await fetchAndParseFeed(feed.url, feedId);
 

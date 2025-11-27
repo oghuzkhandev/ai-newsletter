@@ -6,3 +6,5 @@ export * from "./rss-feed";
 export * from "./rss-fetch";
 export * from "./user";
 export * from "./user-settings";
+export * from "./today-articles";
+export * from "./save-newsletter-settings";

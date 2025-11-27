@@ -8,13 +8,16 @@ datasource db {
 }
 
 model User {
-  id          String        @id @default(auto()) @map("_id") @db.ObjectId
-  clerkUserId String        @unique
-  rssFeeds    RssFeed[]
-  newsletters Newsletter[]
-  settings    UserSettings?
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  id                 String          @id @default(auto()) @map("_id") @db.ObjectId
+  clerkUserId        String          @unique
+  rssFeeds           RssFeed[]
+  newsletters        Newsletter[]
+  newsLetterlogs     NewsletterLog[]
+  settings           UserSettings?
+  newsletterSendTime String?
+  newsletterDays     String[]        @default([])
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
 }
 
 model UserSettings {
@@ -38,41 +41,43 @@ model UserSettings {
 }
 
 model RssFeed {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  userId String @db.ObjectId
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  url String
-  category String?
-  title String?
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String       @db.ObjectId
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  url         String
+  category    String?
+  title       String?
   description String?
-  link String?
-  imageUrl String?
-  language String?
+  link        String?
+  imageUrl    String?
+  language    String?
   lastFetched DateTime?
-  articles RssArticle[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  isActive    Boolean      @default(true)
+  articles    RssArticle[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 
   @@unique([userId, url])
   @@index([userId])
+  @@index([userId, isActive])
 }
 
 model RssArticle {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  feedId String @db.ObjectId
-  feed RssFeed @relation(fields: [feedId], references: [id], onDelete: Cascade)
-  guid String @unique
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  feedId        String   @db.ObjectId
+  feed          RssFeed  @relation(fields: [feedId], references: [id], onDelete: Cascade)
+  guid          String   @unique
   sourceFeedIds String[] @db.ObjectId
-  title String
-  link String
-  content String?
-  summary String?
-  pubDate DateTime
-  author String?
-  categories String[]
-  imageUrl String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  title         String
+  link          String
+  content       String?
+  summary       String?
+  pubDate       DateTime
+  author        String?
+  categories    String[]
+  imageUrl      String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   @@index([feedId])
   @@index([pubDate])
@@ -81,23 +86,39 @@ model RssArticle {
 }
 
 model Newsletter {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  userId String @db.ObjectId
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  suggestedTitles String[]
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId                String   @db.ObjectId
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  suggestedTitles       String[]
   suggestedSubjectLines String[]
-  body String
-  topAnnouncements String[]
-  additionalInfo String?
-  startDate DateTime
-  endDate DateTime
-  userInput String?
-  feedsUsed String[] @db.ObjectId
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  body                  String
+  topAnnouncements      String[]
+  additionalInfo        String?
+  startDate             DateTime
+  endDate               DateTime
+  userInput             String?
+  feedsUsed             String[] @db.ObjectId
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
 
   @@index([userId])
   @@index([userId, createdAt])
   @@index([feedsUsed])
   @@index([createdAt])
+}
+
+model NewsletterLog {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String   @db.ObjectId
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sentAt         DateTime
+  articleCount   Int
+  recipientEmail String
+  status         String   @default("sent")
+  errorMessage   String?
+  createdAt      DateTime @default(now())
+
+  @@index([userId])
+  @@index([sentAt])
+  @@index([userId, sentAt])
 }

@@ -46,22 +46,12 @@ export async function createNewsletter(data: {
   }, "create newsletter");
 }
 
-/**
- * Gets all newsletters for a user, ordered by most recent first
- *
- * Supports pagination via limit and skip options.
- * Used for displaying newsletter history.
- *
- * @param userId - User's database ID
- * @param options - Optional pagination parameters
- * @returns Array of newsletters
- */
 export async function getNewslettersByUserId(
   userId: string,
   options?: {
     limit?: number;
     skip?: number;
-  },
+  }
 ) {
   return wrapDatabaseOperation(async () => {
     return await prisma.newsletter.findMany({
@@ -77,16 +67,6 @@ export async function getNewslettersByUserId(
   }, "fetch newsletters by user");
 }
 
-/**
- * Gets a single newsletter by ID with authorization check
- *
- * Ensures the newsletter belongs to the requesting user
- * for security. Returns null if not found.
- *
- * @param id - Newsletter ID
- * @param userId - User's database ID for authorization
- * @returns Newsletter or null if not found/unauthorized
- */
 export async function getNewsletterById(id: string, userId: string) {
   return wrapDatabaseOperation(async () => {
     const newsletter = await prisma.newsletter.findUnique({
@@ -127,19 +107,8 @@ export async function getNewslettersCountByUserId(userId: string) {
   }, "count newsletters by user");
 }
 
-/**
- * Deletes a newsletter by ID with authorization check
- *
- * Verifies the newsletter exists and belongs to the user
- * before deletion. Throws error if not authorized.
- *
- * @param id - Newsletter ID to delete
- * @param userId - User's database ID for authorization
- * @returns Deleted newsletter record
- */
 export async function deleteNewsletter(id: string, userId: string) {
   return wrapDatabaseOperation(async () => {
-    // Verify the newsletter exists and belongs to the user
     const newsletter = await prisma.newsletter.findUnique({
       where: {
         id,
@@ -154,7 +123,6 @@ export async function deleteNewsletter(id: string, userId: string) {
       throw new Error("Unauthorized: Newsletter does not belong to user");
     }
 
-    // Delete the newsletter
     return await prisma.newsletter.delete({
       where: {
         id,

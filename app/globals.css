@@ -127,9 +127,9 @@
 .cl-pricingTable {
   display: flex;
   justify-content: center;
-  gap: 80px;
-  width: 900px;
-  height: 750px;
+  gap: 100px;
+  width: 1000px;
+  height: 600px;
 }
 
 /* Kart */
@@ -165,7 +165,7 @@
 
 /* Plan adı */
 .cl-pricingTableCardHeader h2 {
-  font-size: 1.6rem !important;
+  font-size: 1.2rem !important;
   font-weight: 800 !important;
   background: linear-gradient(90deg, #e53d3a, #da7726);
   -webkit-background-clip: text;
@@ -178,6 +178,7 @@
   color: #64748b;
   margin-top: 10px;
   font-weight: 500;
+  font-size: 0.75rem !important;
 }
 
 .cl-pricingTableCardTitleContainer {
@@ -186,7 +187,7 @@
 
 .cl-pricingTableCardBody {
   padding: 4px !important;
-  font-size: 0.95rem !important;
+  font-size: 0.75rem !important;
   color: #334155 !important;
 }
 
@@ -198,31 +199,38 @@
   border-style: dashed;
 }
 
+.cl-internal-1cg28h7{
+  font-size: 1.1rem !important;
+  margin-top: 4px;
+}
+
 .cl-pricingTableCardFeeContainer {
   margin-top: 6px !important;
   text-align: center !important;
   border-top: 1px solid #e2e8f0;
 }
 
-.cl-pricingTableCardPeriodToggle {
-  margin-top: 5px !important;
+.cl-internal-rwh33a{
+  font-size: 0.8rem;
+  margin-top: 4px;
 }
 
-/* tik ikonlarını yeşil yapalım */
+.cl-pricingTableCardPeriodToggle {
+  margin-top: 0px !important;
+}
+
 .cl-pricingTableCardBody svg {
   color: #10b981 !important;
 }
 
-/* Footer */
 .cl-pricingTableCardFooter {
-  padding: 15px !important;
+  padding: 8px !important;
 }
 
-/* CTA Button */
 .cl-pricingTableCardFooter button {
   width: 100%;
   border-radius: 18px !important;
-  padding: 12px 18px !important;
+  padding: 8px 12px !important;
   font-weight: 600 !important;
   background: linear-gradient(90deg, #067d41, #43cc63) !important;
   color: white !important;
@@ -230,9 +238,45 @@
 }
 
 .cl-pricingTableCardFooter button:hover {
-  transform: scale(1.04);
+  transform: scale(1.02);
+}
+
+.cl-pricingTableCardFeatures p{
+  font-size: 0.7rem;
+  font-weight: 600;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/* ---- Clerk Sign-In Custom Styling (NEW UI) ---- */
+
+.cl-internal-1dauvpw {
+  display: none !important;
+}
+
+.cl-cardBox{
+  box-shadow: 10px 10px 20px #7b4bff;
+}
+
+.cl-signIn-root .cl-formButtonPrimary {
+  background: linear-gradient(135deg, #7b4bff, #ff70c5) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  border-radius: 10px !important;
+  transition: 0.2s ease !important;
+}
+
+.cl-signIn-root .cl-formButtonPrimary:hover {
+  transform: translateY(-2px) scale(1.02);
+  background: linear-gradient(135deg, #a887ff, #ff8ed8) !important;
+  box-shadow: 0 0 20px rgba(255, 112, 197, 0.45);
+}
+
+
+/* Footer link */
+.cl-signIn-root .cl-footerActionLink {
+  color: #a78bfa !important;
+  text-decoration: none !important;
 }

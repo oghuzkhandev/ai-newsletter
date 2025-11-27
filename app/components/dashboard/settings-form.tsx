@@ -240,7 +240,7 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                 onChange={(e) => setTagInput(e.target.value)}
                 onKeyDown={handleKeyDown}
               />
-              <Button type="button" onClick={handleAddTag} variant="secondary">
+              <Button type="button" onClick={handleAddTag} variant="destructive">
                 Add
               </Button>
             </div>
@@ -331,7 +331,6 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
           onClick={handleSave}
           disabled={isSaving}
           size="lg"
-          className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
         >
           {isSaving ? (
             <>

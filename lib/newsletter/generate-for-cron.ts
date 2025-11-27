@@ -1,166 +1,150 @@
 import { openai } from "@ai-sdk/openai";
-import { streamObject } from "ai";
+import { generateObject } from "ai";
 import { z } from "zod";
-
 import { buildArticleSummaries, buildNewsletterPrompt } from "./prompt-builder";
-
 import type { ArticleForPrompt } from "./types";
 
-// ✔ Cron’un ihtiyacı olan AI output şeması
+// AI output schema
 const NewsletterSchema = z.object({
-  suggestedTitles: z.array(z.string()).length(5),
-  topAnnouncements: z.array(z.string()).length(5),
-  body: z.string(), // newsletter markdown
+  suggestedTitles: z.array(z.string()),
+  suggestedSubjectLines: z.array(z.string()),
+  body: z.string(),
+  topAnnouncements: z.array(z.string()),
   additionalInfo: z.string().optional(),
 });
 
-export async function generateNewsletterForCron({
-  articles,
-  settings,
-}: {
+interface GenerateParams {
   articles: ArticleForPrompt[];
   settings: any;
-}) {
-  // 1) Makale özetlerini hazırla
+  feeds?: Array<{ id: string; title?: string | null; url: string; category?: string | null }>;
+}
+
+export async function generateNewsletterForCron({ articles, settings, feeds }: GenerateParams) {
+  // 1. Tarih aralığı - bugün
+  const now = new Date();
+  const oneDayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+
+  // 2. Makale özetlerini hazırla
   const articleSummaries = buildArticleSummaries(articles);
 
-  // 2) Prompt oluştur
+  // 3. Prompt oluştur (aynı prompt builder'ı kullanıyoruz!)
   const prompt = buildNewsletterPrompt({
-    startDate: new Date(),
-    endDate: new Date(),
+    startDate: oneDayAgo,
+    endDate: now,
     articleSummaries,
     articleCount: articles.length,
     userInput: "",
     settings,
+    feeds,
   });
 
-  // 3) AI’ya isteği gönder
-  const { object } = await streamObject({
-    model: openai("gpt-4o-mini"),
+  console.log(`[generateNewsletterForCron] Prompt length: ${prompt.length}`);
+  console.log(`[generateNewsletterForCron] Articles: ${articles.length}`);
+
+  // 4. AI'ya gönder - generateObject kullan (stream değil, tam sonuç)
+  const { object } = await generateObject({
+    model: openai("gpt-4o"),
     schema: NewsletterSchema,
     prompt,
   });
 
-  const ai = await object;
-
-  // 4) Subject = AI title’lardan ilki
+  // 5. Subject line
   const subject =
-    ai.suggestedTitles?.[0] || settings?.newsletterName || "Your Newsletter";
+    object.suggestedSubjectLines?.[0] ||
+    object.suggestedTitles?.[0] ||
+    settings?.newsletterName ||
+    "Your Daily Newsletter";
 
-  // 5) AI'nın body’sini Markdown → HTML uyumlu hale getir
-  const aiBodyHtml = ai.body
-    .replace(/\n/g, "<br/>")
-    .replace(/#{1,6}\s?/g, "<h2>")
-    .replace(/<\/h2><br\/>/g, "</h2>");
+  // 6. HTML email oluştur
+  const html = buildEmailHtml({
+    body: object.body,
+    settings,
+    subject,
+  });
 
-  // 6) SENİN HTML TEMPLATE’İN içine enjekte ediyoruz
-  const html = `
+  return { subject, html, newsletter: object };
+}
+
+/**
+ * Markdown body'yi HTML email'e çevir
+ */
+function buildEmailHtml({
+  body,
+  settings,
+  subject,
+}: {
+  body: string;
+  settings: any;
+  subject: string;
+}) {
+  // Markdown → HTML dönüşümü (basit)
+  let htmlBody = body
+    // Headers
+    .replace(/^### (.+)$/gm, '<h3 style="color:#1c1917;font-size:18px;font-weight:600;margin:24px 0 8px;">$1</h3>')
+    .replace(/^## (.+)$/gm, '<h2 style="color:#e11d48;font-size:24px;font-weight:700;margin:32px 0 16px;padding-bottom:8px;border-bottom:2px solid #fecdd3;">$1</h2>')
+    .replace(/^# (.+)$/gm, '<h1 style="color:#e11d48;font-size:28px;font-weight:700;margin:24px 0 16px;text-align:center;">$1</h1>')
+    // Links
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:#2563eb;text-decoration:underline;">$1</a>')
+    // Bold
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    // Italic
+    .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+    // Line breaks
+    .replace(/\n\n/g, '</p><p style="color:#44403c;font-size:16px;line-height:1.7;margin:16px 0;">')
+    .replace(/\n/g, '<br/>');
+
+  // Wrap in paragraph
+  htmlBody = `<p style="color:#44403c;font-size:16px;line-height:1.7;margin:16px 0;">${htmlBody}</p>`;
+
+  const newsletterName = settings?.newsletterName || "Daily Newsletter";
+  const description = settings?.description || "Your AI-curated news digest";
+  const companyName = settings?.companyName || "";
+  const customFooter = settings?.customFooter || "";
+  const disclaimerText = settings?.disclaimerText || "";
+
+  const today = new Date().toLocaleDateString("tr-TR", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  return `
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${settings?.newsletterName || "Daily Newsletter"}</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-      'Helvetica Neue', Arial, sans-serif;
-      background-color: #fafaf9;
-      color: #1c1917;
-      line-height: 1.6;
-    }
-    .container {
-      max-inline-size: 700px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
-    .header {
-      text-align: center;
-      margin-block-end: 40px;
-      padding-block-end: 30px;
-      border-block-end: 1px solid #e7e5e4;
-    }
-    .logo {
-      font-size: 28px;
-      font-weight: 700;
-      color: #1c1917;
-      margin-block-end: 8px;
-    }
-    .tagline {
-      color: #78716c;
-      font-size: 14px;
-    }
-    .date {
-      display: inline-block;
-      background: linear-gradient(135deg, #fecaca 0%, #fde68a 100%);
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
-      color: #78716c;
-      margin-block-start: 16px;
-    }
-    .newsletter-body {
-      margin-block-start: 40px;
-      font-size: 16px;
-      line-height: 1.7;
-      color: #1c1917;
-    }
-    .footer {
-      text-align: center;
-      margin-block-start: 40px;
-      padding-block-start: 30px;
-      border-block-start: 1px solid #e7e5e4;
-      color: #a8a29e;
-      font-size: 12px;
-    }
-    .footer a {
-      color: #78716c;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${subject}</title>
 </head>
-
-<body>
-  <div class="container">
-
+<body style="margin:0;padding:0;background-color:#fafaf9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;">
+  
+  <div style="max-width:680px;margin:0 auto;padding:40px 20px;">
+    
     <!-- HEADER -->
-    <div class="header">
-      <div class="logo">${settings?.newsletterName || "Daily Digest"}</div>
-      <div class="tagline">
-        ${settings?.description || "Today's top AI-generated insights"}
-      </div>
-      <div class="date">
-        ${new Date().toLocaleDateString("en-US", {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })}
+    <div style="text-align:center;margin-bottom:40px;padding-bottom:30px;border-bottom:1px solid #e7e5e4;">
+      <h1 style="margin:0 0 8px;font-size:32px;font-weight:700;color:#1c1917;">
+        ${newsletterName}
+      </h1>
+      <p style="margin:0;color:#78716c;font-size:14px;">
+        ${description}
+      </p>
+      <div style="display:inline-block;background:linear-gradient(135deg,#fecaca 0%,#fde68a 100%);padding:8px 20px;border-radius:20px;font-size:13px;font-weight:600;color:#78716c;margin-top:16px;">
+        ${today}
       </div>
     </div>
 
-    <!-- AI GENERATED NEWSLETTER -->
-    <div class="newsletter-body">
-      ${aiBodyHtml}
+    <!-- NEWSLETTER BODY -->
+    <div style="background:#ffffff;border-radius:12px;padding:32px;border:1px solid #e7e5e4;">
+      ${htmlBody}
     </div>
 
     <!-- FOOTER -->
-    <div class="footer">
-      ${settings?.customFooter ? `<p>${settings.customFooter}</p>` : ""}
-      ${
-        settings?.disclaimerText
-          ? `<p style="margin-block-start:8px;">${settings.disclaimerText}</p>`
-          : ""
-      }
-      ${
-        settings?.companyName
-          ? `<p style="margin-block-start:16px;">© ${new Date().getFullYear()} ${
-              settings.companyName
-            }</p>`
-          : ""
-      }
-      <p style="margin-block-start:12px; color:#d6d3d1;">
+    <div style="text-align:center;margin-top:40px;padding-top:30px;border-top:1px solid #e7e5e4;color:#a8a29e;font-size:12px;">
+      ${customFooter ? `<p style="margin:0 0 12px;">${customFooter}</p>` : ""}
+      ${disclaimerText ? `<p style="margin:0 0 12px;font-style:italic;">${disclaimerText}</p>` : ""}
+      ${companyName ? `<p style="margin:0 0 12px;">© ${new Date().getFullYear()} ${companyName}</p>` : ""}
+      <p style="margin:16px 0 0;color:#d6d3d1;">
         Powered by AI Newsletter ✨
       </p>
     </div>
@@ -168,10 +152,5 @@ export async function generateNewsletterForCron({
   </div>
 </body>
 </html>
-`;
-
-  return {
-    subject,
-    html,
-  };
+  `.trim();
 }

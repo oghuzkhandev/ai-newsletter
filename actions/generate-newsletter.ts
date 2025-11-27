@@ -44,7 +44,7 @@ export async function generateNewsletterStream(params: {
     settings,
   });
   const { partialObjectStream } = await streamObject({
-    model: openai("gpt-4o-mini"),
+    model: openai("gpt-4o"),
     schema: NewsletterSchema,
     prompt,
   });

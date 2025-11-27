@@ -1,7 +1,3 @@
-// Collapsible version of the sidebar with improved hover effects
-// Your layout, width, height, mobile logic all preserved exactly.
-// Only collapsible + better hover added.
-
 "use client";
 
 import { useState } from "react";
@@ -63,13 +59,23 @@ function getPlanBadge(plan: Plan) {
 }
 
 export function DashboardSidebar() {
-  const pathname = usePathname();
+  const rawPath = usePathname();
+
+  function normalizePath(path: string) {
+    const parts = path.split("/").filter(Boolean);
+    if (["en", "tr"].includes(parts[0])) {
+      parts.shift();
+    }
+    return "/" + parts.join("/");
+  }
+
+  const pathname = normalizePath(rawPath);
+
   const plan = usePlan();
   const [collapsed, setCollapsed] = useState(false);
 
   const content = (
     <div className="flex h-full flex-col">
-      {/* HEADER */}
       <div className="flex items-center justify-between px-4 pb-4 pt-6">
         {!collapsed && (
           <motion.div
@@ -80,18 +86,17 @@ export function DashboardSidebar() {
             <div className="flex items-center gap-2">
               <UserButton />
               <span className="text-lg font-bold tracking-tight text-slate-900">
-                Newsflow
+                GlobeBrief
               </span>
               {getPlanBadge(plan)}
             </div>
             <p className="mt-1 text-xs text-slate-500">
-              AI-powered Turkish news digest
+              AI-powered news digest
             </p>
           </motion.div>
         )}
       </div>
 
-      {/* NAVIGATION */}
       <ScrollArea className="flex-1 px-2 pb-4">
         <nav className="space-y-1 mt-3">
           {navItems.map((item) => {
@@ -102,37 +107,57 @@ export function DashboardSidebar() {
             return (
               <Link key={item.href} href={item.href}>
                 <motion.div
-                  whileHover={{ scale: 1.02, x: 4 }}
-                  transition={{ type: "spring", stiffness: 250, damping: 18 }}
-                  className="mt-5"
+                  whileHover={{
+                    scale: collapsed ? 1.06 : 1.02,
+                    x: collapsed ? 0 : 4,
+                  }}
+                  transition={{ type: "spring", stiffness: 240, damping: 18 }}
+                  className="mt-4"
                 >
                   <Button
-                    variant={isActive ? "secondary" : "ghost"}
+                    variant="ghost"
                     className={cn(
-                      "relative mb-1 flex w-full justify-start gap-2 rounded-xl px-3 py-2 text-sm",
-                      "transition-all duration-150",
-                      "hover:bg-red-200 hover:text-slate-900 hover:shadow-red-300 shadow-lg",
-                      isActive && "bg-red-900 text-slate-50 "
+                      "relative z-10 mb-1 flex w-full justify-start gap-3 rounded-xl px-4 py-2 text-sm transition-all duration-300",
+                      "bg-white/50 backdrop-blur-xl border border-white/30 shadow-sm",
+                      "hover:bg-gradient-to-r hover:from-rose-400/20 hover:to-purple-500/20 hover:border-white/40 hover:shadow-[0_0_18px_rgba(255,80,180,0.35)]",
+                      isActive &&
+                        "bg-gradient-to-r from-rose-600 to-purple-700 text-white border-white/40 shadow-[0_0_20px_rgba(255,80,150,0.45)] scale-[1.02]"
                     )}
                   >
                     {isActive && (
                       <motion.div
-                        layoutId="active-indicator"
+                        className="absolute inset-0 rounded-xl z-0 pointer-events-none"
+                        initial={{ opacity: 0.4 }}
+                        animate={{ opacity: [0.4, 0.65, 0.4] }}
                         transition={{
-                          type: "spring",
-                          stiffness: 300,
-                          damping: 20,
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                        style={{
+                          background:
+                            "radial-gradient(circle at center, rgba(255,150,220,0.45), transparent 70%)",
                         }}
                       />
                     )}
 
                     <Icon
                       className={cn(
-                        "h-4 w-4 flex items-center justify-center transition-colors",
-                        isActive ? "text-slate-50" : "text-black"
+                        "h-4 w-4 transition-colors z-10",
+                        isActive ? "text-white" : "text-slate-700"
                       )}
                     />
-                    {!collapsed && <span>{item.label}</span>}
+
+                    {!collapsed && (
+                      <span
+                        className={cn(
+                          "transition-colors font-medium tracking-wide z-10",
+                          isActive ? "text-white" : "text-slate-800"
+                        )}
+                      >
+                        {item.label}
+                      </span>
+                    )}
                   </Button>
                 </motion.div>
               </Link>
@@ -141,7 +166,6 @@ export function DashboardSidebar() {
         </nav>
       </ScrollArea>
 
-      {/* FOOTER */}
       {!collapsed && (
         <div className="border-t border-slate-200 px-4 py-3 text-xs text-slate-500">
           <p>Tip: Connect more RSS feeds to improve your daily digest.</p>
@@ -152,7 +176,6 @@ export function DashboardSidebar() {
 
   return (
     <>
-      {/* MOBILE */}
       <div className="flex h-14 items-center justify-between border-b border-slate-200 bg-white px-4 lg:hidden">
         <div className="flex items-center gap-2">
           <span className="text-base font-semibold tracking-tight text-slate-900">
@@ -177,19 +200,17 @@ export function DashboardSidebar() {
         </Sheet>
       </div>
 
-      {/* DESKTOP COLLAPSIBLE */}
       <aside
         className={cn(
-          "hidden lg:fixed lg:inset-y-0 lg:flex items-center justify-center lg:flex-col lg:border-r lg:border-slate-200 lg:bg-white transition-all duration-300",
+          "hidden lg:fixed lg:inset-y-0 lg:flex items-center justify-center lg:flex-col lg:border-r lg:border-slate-200 lg:bg-white/80 backdrop-blur-xl transition-all duration-300",
           collapsed ? "lg:w-20" : "lg:w-60"
         )}
       >
         {content}
 
-        {/* COLLAPSE BUTTON */}
         <button
           onClick={() => setCollapsed((c) => !c)}
-          className="absolute -right-3 top-6 z-50 flex h-6 w-6 items-center justify-center rounded-full border bg-white border-slate-300 shadow hover:bg-slate-50 transition"
+          className="absolute -right-3 top-6 z-50 flex h-6 w-6 items-center justify-center rounded-full border bg-white/80 backdrop-blur-lg border-slate-300 shadow hover:bg-slate-50 transition"
         >
           {collapsed ? (
             <ChevronRight className="h-4 w-4" />

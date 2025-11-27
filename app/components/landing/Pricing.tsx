@@ -1,22 +1,56 @@
+"use client";
 import { PricingTable } from "@clerk/nextjs";
 import { Check, Minus } from "lucide-react";
+import Image from "next/image";
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 
 export default function Pricing() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i);
+
+  const faqs = [
+    {
+      question: "What's the difference between Starter and Pro?",
+      answer:
+        "Starter gives you 1 daily AI summary and up to 5 RSS sources. Pro unlocks unlimited feeds, up to 3 daily digests, stronger AI summarization, full automation, premium templates, and alert-based notifications.",
+    },
+    {
+      question: "Can I switch plans later?",
+      answer:
+        "Absolutely. You can upgrade or downgrade at any time. Upgrades apply instantly; downgrades take effect at the end of your billing cycle.",
+    },
+    {
+      question: "Do you lock me into a contract?",
+      answer:
+        "No long-term commitments. All plans are month-to-month and you can cancel directly from your account settings whenever you want.",
+    },
+    {
+      question: "What happens if I hit my limits on Starter?",
+      answer:
+        "If you exceed your allowed sources or summaries, we'll prompt you to upgrade—your data is never deleted or throttled.",
+    },
+  ];
+
   return (
     <div className="w-full pb-32 pt-24" id="pricing">
-      {/* Header */}
-      <div className="max-w-3xl mx-auto text-center px-4">
-        <h1 className="text-4xl font-bold tracking-tight text-slate-900">
-          Simple, transparent pricing
-        </h1>
-        <p className="mt-4 text-lg text-slate-600">
-          Build your own AI-powered news digest from Turkish RSS sources – pick the plan that
-          matches how deep you want to go.
-        </p>
+      <div className="flex max-w-7xl mx-auto text-center gap-10 px-4">
+        <div className="whitespace-normal wrap-break-word flex-2">
+          <h1 className="text-4xl font-bold tracking-tight text-slate-900">
+            Simple, transparent pricing
+          </h1>
+          <p className="mt-4 text-lg text-slate-600">
+            Build your own AI-powered news digest from all around of the world RSS sources – pick the plan that
+            matches how deep you want to go.
+          </p>
+        </div>
+        <div className="flex-1">
+          <Image src="/Subs.svg" alt="Subs" height={250} width={250} />
+        </div>
       </div>
 
       {/* Clerk Pricing Table */}
-      <div className="mt-16 flex justify-center px-4">
+      <div className="mt-16 flex justify-center w-full ">
         <div className="w-full max-w-4xl">
           <PricingTable />
         </div>
@@ -177,52 +211,50 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* PREMIUM FAQ */}
       <section className="mt-24 max-w-4xl mx-auto px-4">
-        <h2 className="text-3xl font-semibold text-slate-900 text-center mb-10">
+        <h2 className="text-4xl font-bold text-center mb-14 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
           Frequently Asked Questions
         </h2>
 
-        <div className="space-y-8">
-          <div>
-            <h3 className="text-lg font-semibold">
-              What&apos;s the difference between Starter and Pro?
-            </h3>
-            <p className="text-slate-600 mt-2">
-              Starter is great if you want a single daily AI summary from a small set of
-              RSS sources. Pro is designed for heavier users who need unlimited feeds, up
-              to 3 daily digests, stronger AI summarization, automation, and alerts.
-            </p>
-          </div>
+        <div className="space-y-4">
+          {faqs.map((faq, i) => (
+            <div
+              key={i}
+              className="border border-slate-200 rounded-2xl bg-white/70 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300"
+            >
+              <button
+                onClick={() => toggle(i)}
+                className="flex justify-between items-center w-full p-6 text-left"
+              >
+                <span className="text-lg font-medium text-slate-900">
+                  {faq.question}
+                </span>
+                <ChevronDown
+                  className={`h-6 w-6 text-slate-500 transition-transform duration-300 ${
+                    openIndex === i ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
 
-          <div>
-            <h3 className="text-lg font-semibold">Can I switch plans later?</h3>
-            <p className="text-slate-600 mt-2">
-              Yes. You can upgrade or downgrade at any time. When you upgrade, the changes
-              take effect immediately, and when you downgrade, you keep access until the
-              end of your current billing period.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold">Do you lock me into a contract?</h3>
-            <p className="text-slate-600 mt-2">
-              No. All plans are month-to-month. You can cancel directly from your account
-              settings whenever you like.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold">
-              What happens if I hit my limits on Starter?
-            </h3>
-            <p className="text-slate-600 mt-2">
-              If you try to add more than 5 sources or generate more summaries than your
-              plan allows, we&apos;ll simply ask you to upgrade to Pro. We never silently
-              delete or throttle your existing data.
-            </p>
-          </div>
+              {openIndex === i && (
+                <div className="px-6 pb-6 pt-0 text-slate-600 animate-fadeIn">
+                  {faq.answer}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
+
+        <style>{`
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .animate-fadeIn {
+            animation: fadeIn 0.25s ease-out;
+          }
+        `}</style>
       </section>
     </div>
   );

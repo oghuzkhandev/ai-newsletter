@@ -3,13 +3,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { prisma } from "@/lib/prisma";
 
-// ============================================
-// USER SETTINGS ACTIONS
-// ============================================
-
-/**
- * User settings input type for upsert operations
- */
 export interface UserSettingsInput {
   // Basic Settings
   newsletterName?: string | null;

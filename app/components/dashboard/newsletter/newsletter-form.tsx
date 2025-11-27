@@ -1,6 +1,6 @@
 "use client";
 
-import { Sparkles } from "lucide-react";
+import { Newspaper, Sparkles } from "lucide-react";
 import { useRouter } from "next/navigation";
 import * as React from "react";
 import { toast } from "sonner";
@@ -27,13 +27,34 @@ interface NewsletterFormProps {
   feeds: RssFeed[];
 }
 
+/**
+ * Convert a local Date to UTC midnight ISO string
+ * Example: User selects "Nov 23" in Turkey (UTC+3)
+ * We want to send "2025-11-23T00:00:00.000Z" NOT "2025-11-22T21:00:00.000Z"
+ */
+function toUTCDateString(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}T00:00:00.000Z`;
+}
+
+/**
+ * Convert to end of day in UTC
+ */
+function toUTCEndOfDayString(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}T23:59:59.999Z`;
+}
+
 export function NewsletterForm({ feeds }: NewsletterFormProps) {
   const router = useRouter();
   const [dateRange, setDateRange] = React.useState<DateRange | undefined>();
   const [userInput, setUserInput] = React.useState("");
   const [selectedFeeds, setSelectedFeeds] = React.useState<string[]>([]);
 
-  // Initialize with all feeds selected
   React.useEffect(() => {
     setSelectedFeeds(feeds.map((f) => f.id));
   }, [feeds]);
@@ -46,7 +67,7 @@ export function NewsletterForm({ feeds }: NewsletterFormProps) {
     setSelectedFeeds((prev) =>
       prev.includes(feedId)
         ? prev.filter((id) => id !== feedId)
-        : [...prev, feedId],
+        : [...prev, feedId]
     );
   };
 
@@ -61,11 +82,22 @@ export function NewsletterForm({ feeds }: NewsletterFormProps) {
       return;
     }
 
+    // Convert dates to UTC strings (timezone-safe)
+    const startDateUTC = toUTCDateString(dateRange.from);
+    const endDateUTC = toUTCEndOfDayString(dateRange.to);
+
+    console.log("[NewsletterForm] Date conversion:", {
+      originalFrom: dateRange.from.toString(),
+      originalTo: dateRange.to.toString(),
+      startDateUTC,
+      endDateUTC,
+    });
+
     // Navigate to generation page with parameters
     const params = new URLSearchParams({
       feedIds: JSON.stringify(selectedFeeds),
-      startDate: dateRange.from.toISOString(),
-      endDate: dateRange.to.toISOString(),
+      startDate: startDateUTC,
+      endDate: endDateUTC,
     });
 
     if (userInput.trim()) {
@@ -79,7 +111,12 @@ export function NewsletterForm({ feeds }: NewsletterFormProps) {
     <div className="space-y-6">
       <Card className="transition-all hover:shadow-lg">
         <CardHeader>
-          <CardTitle className="text-2xl">Generate Newsletter</CardTitle>
+          <CardTitle className="text-2xl gap-2 flex items-center">
+            <div className="w-10 h-10 rounded-xl bg-neutral-200 flex items-center justify-center shadow-md">
+              <Newspaper />
+            </div>
+            Generate Newsletter
+          </CardTitle>
           <CardDescription className="text-base">
             Select date range, feeds, and add context to generate your
             AI-powered newsletter
@@ -151,7 +188,7 @@ export function NewsletterForm({ feeds }: NewsletterFormProps) {
           <Button
             onClick={handleGenerate}
             disabled={selectedFeeds.length === 0}
-            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+            className="w-full font-bold"
             size="lg"
           >
             <Sparkles className="h-4 w-4 mr-2" />
