@@ -81,10 +81,12 @@ function buildBodyRequirements(params: NewsletterPromptParams): string[] {
     "After EACH article paragraph, append a clickable link on its own line:",
     "Format: `[Read more →](URL)` or `[Devamını oku →](URL)` based on language.",
     "Each RSS feed MUST appear as its own section.",
-    "Each RSS feed MUST produce **minimum 3** and **maximum 5** article items.",
+    "Each RSS feed MUST produce **minimum 5** and **maximum 7** article items.",
     "Content MUST be deeply analytical, editorial-level, structured and smooth.",
     "Never place the link at the top — ALWAYS at the end of the article item.",
     "Use Markdown (#, ##, ###), bullet points, emphasis, transitions, etc.",
+    "IMPORTANT MUST BE !! Body should be structured, smooth, cohesive — but summaries remain SHORT.",
+    "IMPORTANT MUST BE !! Each article summary MUST be 1–2 sentences MAX.",
   ];
 
   if (params.settings?.disclaimerText)
@@ -101,9 +103,10 @@ function buildBodyRequirements(params: NewsletterPromptParams): string[] {
 ----------------------------------------- */
 function buildImportantNotes(_: NewsletterPromptParams): string[] {
   return [
-    "STRICT RULE: Each feed must contribute *3 to 5* article items.",
+    "STRICT RULE: Each feed must contribute *5 to 7* article items.",
     "STRICT RULE: All feed categories must appear as separate sections.",
     "STRICT RULE: Subheadings only are numbered, not the main headers.",
+    "STRICT RULE: Each article summary must be 1–2 sentences max.",
     "STRICT RULE: 'Read more' link must appear at the end of each article item.",
     "Tone must be premium editorial (NYT / Economist / FT style).",
     "Ensure balance across feeds (no feed is ignored).",
@@ -142,9 +145,8 @@ export function buildNewsletterPrompt(params: NewsletterPromptParams): string {
     "",
     `OUTPUT FORMAT (MANDATORY): Return ONLY this JSON:\n{
   "suggestedTitles": [...],
-  "suggestedSubjectLines": [...],
-  "body": "...",
   "topAnnouncements": [...],
+  "body": "...",
   "additionalInfo": "..."
 }`
   ].join("\n");
