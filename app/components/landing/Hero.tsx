@@ -5,18 +5,20 @@ import {
   Sparkles,
   Zap,
   Clock,
-  ChevronRight,
-  Play,
   ArrowRight,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import HeroVisual from "./HeroVisual";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 export default function Hero() {
+  const t = useTranslations("hero");
+
   return (
     <section className="relative min-h-screen overflow-hidden bg-stone-50">
+      {/* BACKGROUND */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-rose-200/40 rounded-full blur-[120px]" />
         <div className="absolute top-1/2 -right-40 w-[500px] h-[500px] bg-amber-200/30 rounded-full blur-[100px]" />
@@ -35,9 +37,12 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-stone-50" />
       </div>
 
+      {/* CONTENT */}
       <div className="relative max-w-7xl mx-auto px-6 pt-32 lg:pt-40 pb-24 lg:pb-32">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+          {/* LEFT */}
           <div className="text-center lg:text-left">
+            {/* BADGE */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -51,50 +56,52 @@ export default function Hero() {
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                   </span>
                   <span className="text-xs font-semibold text-emerald-600">
-                    New
+                    {t("badgeNew")}
                   </span>
                 </span>
                 <span className="w-px h-4 bg-stone-200" />
                 <span className="text-sm text-stone-600">
-                  100+ curated RSS sources
+                  {t("badgeSubtitle")}
                 </span>
               </span>
             </motion.div>
 
+            {/* TITLE */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
               className="font-serif text-5xl sm:text-6xl lg:text-7xl font-medium tracking-tight text-stone-800 leading-[1.1] mb-6"
             >
-              Your AI-powered
+              {t("title1")}
               <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-rose-500 via-pink-500 to-amber-500">
-                newsletter engine
+                {t("title2")}
               </span>
             </motion.h1>
 
+            {/* SUBTITLE */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-lg sm:text-xl text-stone-500 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10"
             >
-              Build editorial-quality newsletters in minutes. Pick RSS feeds,
-              let AI summarize, and schedule daily sends—all personalized to
-              your voice.
+              {t("subtitle")}
             </motion.p>
 
+            {/* FEATURES */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
               className="flex flex-wrap gap-3 justify-center lg:justify-start mb-10"
             >
-              <FeaturePill icon={Sparkles} text="AI Summarization" />
-              <FeaturePill icon={Clock} text="Auto-scheduling" />
-              <FeaturePill icon={Zap} text="Instant delivery" />
+              <FeaturePill icon={Sparkles} text={t("features.ai")} />
+              <FeaturePill icon={Clock} text={t("features.auto")} />
+              <FeaturePill icon={Zap} text={t("features.instant")} />
             </motion.div>
 
+            {/* BUTTON */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -106,13 +113,14 @@ export default function Hero() {
                   whileTap={{ scale: 0.98 }}
                 >
                   <Button className="w-full py-3">
-                    <p>Start for Free</p>
+                    <p>{t("buttonStart")}</p>
                     <ArrowRight className="w-4 h-4 transition-transform" />
                   </Button>
                 </motion.div>
               </Link>
             </motion.div>
 
+            {/* RATING */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -154,21 +162,22 @@ export default function Hero() {
                     ))}
                   </div>
                   <span className="text-sm font-semibold text-stone-800">
-                    Excellent
+                    {t("rating.excellent")}
                   </span>
                   <span className="text-xs font-semibold px-2 py-0.5 bg-[#00B67A] text-white rounded">
                     ★ 4.9
                   </span>
                 </div>
                 <p className="text-sm text-stone-500 leading-tight">
-                  Rated by{" "}
+                  {t("rating.ratedBy")}{" "}
                   <span className="font-semibold text-stone-800">2,000+</span>{" "}
-                  verified creators
+                  {t("rating.verifiedCreators")}
                 </p>
               </div>
             </motion.div>
           </div>
 
+          {/* RIGHT */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}

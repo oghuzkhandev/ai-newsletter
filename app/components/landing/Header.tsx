@@ -19,6 +19,7 @@ import {
   IconDeviceTv,
   IconChevronDown,
   IconLanguage,
+  IconBulb, // How it works için daha iyi ikon
 } from "@tabler/icons-react";
 
 import { useTranslations } from "next-intl";
@@ -30,7 +31,7 @@ function DeployBanner() {
   const t = useTranslations("banner");
 
   return (
-    <div className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-center py-2 text-sm font-medium shadow-md">
+    <div className="w-full bg-linear-to-r from-blue-500 to-indigo-600 text-white text-center py-2 text-sm font-medium shadow-md">
       🚀 {t("title")} — {t("description")}
     </div>
   );
@@ -41,9 +42,21 @@ export default function Header() {
   const changeLocale = useChangeLocale();
 
   const navItems = [
-    { name: t("features"), link: "#features", icon: <IconSparkles size={18} /> },
-    { name: t("pricing"), link: "#pricing", icon: <IconCreditCard size={18} /> },
-    { name: t("demo"), link: "#demo", icon: <IconDeviceTv size={18} /> },
+    {
+      name: t("features"),
+      link: "#features",
+      icon: <IconSparkles size={18} />,
+    },
+    {
+      name: t("howitworks"),
+      link: "#howitworks",
+      icon: <IconBulb size={18} />, // Yeni ikon
+    },
+    {
+      name: t("pricing"),
+      link: "#pricing",
+      icon: <IconCreditCard size={18} />,
+    },
   ];
 
   const [isOpen, setIsOpen] = useState(false);
@@ -59,7 +72,7 @@ export default function Header() {
             href="/"
             className="flex items-center gap-2 text-lg font-semibold tracking-tight text-blue-700"
           >
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold text-sm shadow-md">
+            <div className="w-8 h-8 rounded-lg bg-linear-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold text-sm shadow-md">
               OK
             </div>
             GlobeBrief
@@ -123,16 +136,17 @@ export default function Header() {
           </div>
         </NavBody>
 
+        {/* MOBILE */}
         <MobileNav>
           <MobileNavHeader>
             <Link
               href="/"
               className="flex items-center gap-2 text-lg font-semibold tracking-tight text-blue-700"
             >
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold text-sm shadow-md">
+              <div className="w-8 h-8 rounded-lg bg-linear-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold text-sm shadow-md">
                 AI
               </div>
-              AI Newsletter
+              GlobeBrief
             </Link>
 
             <MobileNavToggle
@@ -155,7 +169,9 @@ export default function Header() {
             ))}
 
             <div className="pt-2 border-t border-blue-100 mt-2">
-              <p className="text-sm text-blue-700 mb-1 font-semibold">Language</p>
+              <p className="text-sm text-blue-700 mb-1 font-semibold">
+                Language
+              </p>
               <div className="flex gap-2">
                 <button
                   onClick={() => {
@@ -183,7 +199,11 @@ export default function Header() {
             </SignedIn>
 
             <SignedOut>
-              <Button onClick={() => setIsOpen(false)} asChild className="w-full">
+              <Button
+                onClick={() => setIsOpen(false)}
+                asChild
+                className="w-full"
+              >
                 <Link href="/sign-in">{t("login")}</Link>
               </Button>
             </SignedOut>

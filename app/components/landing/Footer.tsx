@@ -2,27 +2,21 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import {
-  Github,
-  Mail,
-  Globe,
-  ArrowUpRight,
-  Sparkles,
-} from "lucide-react";
+import { Github, Mail, Globe, ArrowUpRight, Sparkles } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
+import { useTranslations } from "next-intl";
 
 export default function Footer() {
+  const t = useTranslations("footer");
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="relative overflow-hidden bg-stone-50">
-      {/* Subtle background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-rose-100/30 rounded-full blur-[120px]" />
         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-amber-100/40 rounded-full blur-[100px]" />
       </div>
 
-      {/* Dot pattern */}
       <div
         className="absolute inset-0 opacity-[0.08]"
         style={{
@@ -32,9 +26,8 @@ export default function Footer() {
       />
 
       <div className="relative max-w-7xl mx-auto px-6">
-        {/* Main Footer Content */}
         <div className="py-20">
-          {/* Top Section - Brand & Newsletter */}
+          {/* BRAND & NEWSLETTER */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -49,35 +42,34 @@ export default function Footer() {
                   <Sparkles className="w-5 h-5 text-white" />
                 </div>
                 <h2 className="text-2xl font-bold text-stone-800">
-                  GlobeBrief
+                  {t("brand.name")}
                 </h2>
               </div>
               <p className="text-stone-500 leading-relaxed">
-                Transform your RSS feeds into beautiful, AI-curated newsletters.
-                Save hours every week with intelligent automation.
+                {t("brand.description")}
               </p>
             </div>
 
-            {/* Newsletter Signup Hint */}
+            {/* Newsletter Box */}
             <div className="flex items-center gap-4 px-6 py-4 bg-white rounded-2xl border border-stone-200 shadow-sm">
               <div className="w-12 h-12 rounded-xl bg-stone-100 flex items-center justify-center">
                 <Mail className="w-6 h-6 text-stone-600" />
               </div>
               <div>
-                <p className="font-medium text-stone-800">Stay Updated</p>
-                <p className="text-sm text-stone-500">Get product news & tips</p>
+                <p className="font-medium text-stone-800">{t("newsletter.title")}</p>
+                <p className="text-sm text-stone-500">{t("newsletter.subtitle")}</p>
               </div>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="ml-4 px-4 py-2 bg-stone-900 text-white text-sm font-medium rounded-xl hover:bg-stone-800 transition-colors"
               >
-                Subscribe
+                {t("newsletter.button")}
               </motion.button>
             </div>
           </motion.div>
 
-          {/* Links Grid */}
+          {/* LINKS GRID */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -86,45 +78,25 @@ export default function Footer() {
             className="grid grid-cols-2 md:grid-cols-4 gap-10 lg:gap-20"
           >
             <FooterColumn
-              title="Product"
-              links={[
-                { label: "Features", href: "#features" },
-                { label: "Pricing", href: "#pricing" },
-                { label: "AI Engine", href: "#" },
-                { label: "Templates", href: "#" },
-              ]}
+              title={t("columns.product.title")}
+              links={t.raw("columns.product.links")}
             />
             <FooterColumn
-              title="Resources"
-              links={[
-                { label: "Documentation", href: "#" },
-                { label: "API Reference", href: "#" },
-                { label: "Blog", href: "#" },
-                { label: "Help Center", href: "#" },
-              ]}
+              title={t("columns.resources.title")}
+              links={t.raw("columns.resources.links")}
             />
             <FooterColumn
-              title="Company"
-              links={[
-                { label: "About Us", href: "#" },
-                { label: "Careers", href: "#", badge: "Hiring" },
-                { label: "Contact", href: "#" },
-                { label: "Press Kit", href: "#" },
-              ]}
+              title={t("columns.company.title")}
+              links={t.raw("columns.company.links")}
             />
             <FooterColumn
-              title="Legal"
-              links={[
-                { label: "Privacy Policy", href: "#" },
-                { label: "Terms of Service", href: "#" },
-                { label: "Cookie Policy", href: "#" },
-                { label: "GDPR", href: "#" },
-              ]}
+              title={t("columns.legal.title")}
+              links={t.raw("columns.legal.links")}
             />
           </motion.div>
         </div>
 
-        {/* Bottom Bar */}
+        {/* BOTTOM BAR */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -132,33 +104,18 @@ export default function Footer() {
           transition={{ delay: 0.3 }}
           className="py-8 border-t border-stone-200 flex flex-col md:flex-row justify-between items-center gap-6"
         >
-          {/* Copyright */}
           <p className="text-sm text-stone-500">
-            © {currentYear} GlobeBrief. Crafted with care.
+            © {currentYear} GlobeBrief. {t("bottom.crafted")}
           </p>
 
-          {/* Social Icons */}
           <div className="flex items-center gap-2">
-            <SocialIcon
-              icon={Github}
-              href="https://github.com/oghuzkhandev"
-              label="GitHub"
-            />
-            <SocialIcon
-              icon={Mail}
-              href="mailto:oguzhandogandev@hotmail.com"
-              label="Email"
-            />
-            <SocialIcon
-              icon={Globe}
-              href="https://oguzhandogan.com"
-              label="Website"
-            />
+            <SocialIcon icon={Github} href="https://github.com/oghuzkhandev" label="GitHub" />
+            <SocialIcon icon={Mail} href="mailto:oguzhandogandev@hotmail.com" label="Email" />
+            <SocialIcon icon={Globe} href="https://oguzhandogan.com" label="Website" />
           </div>
 
-          {/* Designer Credit */}
           <p className="text-sm text-stone-500 flex items-center gap-1">
-            Designed by{" "}
+            {t("bottom.designedBy")}{" "}
             <a
               href="https://oguzhandogan.com"
               target="_blank"
@@ -176,15 +133,7 @@ export default function Footer() {
 
 type IconType = ComponentType<SVGProps<SVGSVGElement>>;
 
-function SocialIcon({
-  icon: Icon,
-  href,
-  label,
-}: {
-  icon: IconType;
-  href: string;
-  label: string;
-}) {
+function SocialIcon({ icon: Icon, href, label }: { icon: IconType; href: string; label: string }) {
   return (
     <motion.a
       href={href}
@@ -200,7 +149,6 @@ function SocialIcon({
   );
 }
 
-/* -------- Footer Column Component -------- */
 function FooterColumn({
   title,
   links,

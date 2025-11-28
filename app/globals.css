@@ -153,14 +153,14 @@
   padding: 20px !important;
   text-align: center !important;
 }
-.cl-internal-eqrx54{
-  background-color:rgba(247, 247, 246, 0.925) !important;
+.cl-internal-eqrx54 {
+  background-color: rgba(247, 247, 246, 0.925) !important;
 }
-.cl-internal-1vdipc1{
+.cl-internal-1vdipc1 {
   color: #09b961 !important;
 }
-.cl-internal-102r43n{
-  color:#09b961 !important;
+.cl-internal-102r43n {
+  color: #09b961 !important;
 }
 
 /* Plan adı */
@@ -199,7 +199,7 @@
   border-style: dashed;
 }
 
-.cl-internal-1cg28h7{
+.cl-internal-1cg28h7 {
   font-size: 1.1rem !important;
   margin-top: 4px;
 }
@@ -210,7 +210,7 @@
   border-top: 1px solid #e2e8f0;
 }
 
-.cl-internal-rwh33a{
+.cl-internal-rwh33a {
   font-size: 0.8rem;
   margin-top: 4px;
 }
@@ -241,7 +241,7 @@
   transform: scale(1.02);
 }
 
-.cl-pricingTableCardFeatures p{
+.cl-pricingTableCardFeatures p {
   font-size: 0.7rem;
   font-weight: 600;
 }
@@ -256,7 +256,7 @@ html {
   display: none !important;
 }
 
-.cl-cardBox{
+.cl-cardBox {
   box-shadow: 10px 10px 20px #7b4bff;
 }
 
@@ -274,9 +274,18 @@ html {
   box-shadow: 0 0 20px rgba(255, 112, 197, 0.45);
 }
 
-
 /* Footer link */
 .cl-signIn-root .cl-footerActionLink {
   color: #a78bfa !important;
   text-decoration: none !important;
+}
+
+.no-visible-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.no-visible-scrollbar::-webkit-scrollbar {
+  display: none;
 }

@@ -3,15 +3,16 @@
 import React from "react";
 import { motion } from "motion/react";
 import dynamic from "next/dynamic";
+import { useTranslations } from "next-intl";
 
 const World = dynamic(
   () => import("../../../components/ui/globe").then((m) => m.World),
-  {
-    ssr: false,
-  }
+  { ssr: false }
 );
 
 export default function GlobalNewsGlobe() {
+  const t = useTranslations("globe");
+
   const globeConfig = {
     pointSize: 4,
     globeColor: "#062056",
@@ -34,7 +35,9 @@ export default function GlobalNewsGlobe() {
     autoRotate: true,
     autoRotateSpeed: 1,
   };
+
   const colors = ["#06b6d4", "#3b82f6", "#6366f1"];
+
   const sampleArcs = [
     {
       order: 1,
@@ -117,6 +120,7 @@ export default function GlobalNewsGlobe() {
       arcAlt: 0.3,
       color: colors[Math.floor(Math.random() * (colors.length - 1))],
     },
+
     {
       order: 4,
       startLat: 11.986597,
@@ -144,6 +148,7 @@ export default function GlobalNewsGlobe() {
       arcAlt: 0.1,
       color: colors[Math.floor(Math.random() * (colors.length - 1))],
     },
+
     {
       order: 5,
       startLat: 14.5995,
@@ -171,6 +176,7 @@ export default function GlobalNewsGlobe() {
       arcAlt: 0.2,
       color: colors[Math.floor(Math.random() * (colors.length - 1))],
     },
+
     {
       order: 6,
       startLat: -15.432563,
@@ -198,6 +204,7 @@ export default function GlobalNewsGlobe() {
       arcAlt: 0.3,
       color: colors[Math.floor(Math.random() * (colors.length - 1))],
     },
+
     {
       order: 7,
       startLat: -19.885592,
@@ -225,6 +232,7 @@ export default function GlobalNewsGlobe() {
       arcAlt: 0.2,
       color: colors[Math.floor(Math.random() * (colors.length - 1))],
     },
+
     {
       order: 8,
       startLat: -8.833221,
@@ -252,6 +260,7 @@ export default function GlobalNewsGlobe() {
       arcAlt: 0.5,
       color: colors[Math.floor(Math.random() * (colors.length - 1))],
     },
+
     {
       order: 9,
       startLat: 51.5072,
@@ -279,6 +288,7 @@ export default function GlobalNewsGlobe() {
       arcAlt: 0.5,
       color: colors[Math.floor(Math.random() * (colors.length - 1))],
     },
+
     {
       order: 10,
       startLat: -22.9068,
@@ -306,6 +316,7 @@ export default function GlobalNewsGlobe() {
       arcAlt: 0.3,
       color: colors[Math.floor(Math.random() * (colors.length - 1))],
     },
+
     {
       order: 11,
       startLat: 41.9028,
@@ -333,6 +344,7 @@ export default function GlobalNewsGlobe() {
       arcAlt: 0.2,
       color: colors[Math.floor(Math.random() * (colors.length - 1))],
     },
+
     {
       order: 12,
       startLat: 34.0522,
@@ -360,6 +372,7 @@ export default function GlobalNewsGlobe() {
       arcAlt: 0.3,
       color: colors[Math.floor(Math.random() * (colors.length - 1))],
     },
+
     {
       order: 13,
       startLat: 52.52,
@@ -387,6 +400,7 @@ export default function GlobalNewsGlobe() {
       arcAlt: 0.1,
       color: colors[Math.floor(Math.random() * (colors.length - 1))],
     },
+
     {
       order: 14,
       startLat: -33.936138,
@@ -399,12 +413,10 @@ export default function GlobalNewsGlobe() {
   ];
 
   return (
-    <section className="relative flex flex-row items-center justify-center py-24 min-h-[600px] bg-gradient-to-b from-slate-50 to-white dark:from-black dark:to-[#010409] overflow-hidden">
-      {/* Glow Background */}
+    <section className="relative flex flex-row items-center justify-center py-24 min-h-[600px] bg-gradient-to-b from-orange-50 to-white dark:from-black dark:to-[#010409] overflow-hidden">
       <div className="absolute inset-0 pointer-events-none select-none opacity-[0.15] bg-[radial-gradient(circle_at_center,rgba(56,132,245,0.45),transparent_70%)]" />
 
       <div className="max-w-7xl mx-auto w-full px-4 relative z-10">
-        {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -412,38 +424,33 @@ export default function GlobalNewsGlobe() {
           className="text-center max-w-3xl mx-auto"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
-            Global news — curated by AI, delivered daily
+            {t("title")}
           </h2>
 
           <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            AI scans global news sources, filters noise, summarizes key
-            insights, and sends a personalized digest straight to your inbox
-            every morning.
+            {t("subtitle")}
           </p>
 
           <div className="mt-5 flex justify-center gap-3 flex-wrap text-sm sm:text-base">
             <span className="px-3 py-1.5 rounded-full bg-indigo-100 text-indigo-700 border border-indigo-200 dark:bg-indigo-900/30 dark:text-indigo-300">
-              🌍 Global coverage
+              {t("badge1")}
             </span>
             <span className="px-3 py-1.5 rounded-full bg-sky-100 text-sky-700 border border-sky-200 dark:bg-sky-900/30 dark:text-sky-300">
-              🤖 AI-powered summaries
+              {t("badge2")}
             </span>
             <span className="px-3 py-1.5 rounded-full bg-violet-100 text-violet-700 border border-violet-200 dark:bg-violet-900/30 dark:text-violet-300">
-              📩 Daily email digest
+              {t("badge3")}
             </span>
           </div>
         </motion.div>
 
-        {/* GLOBE WRAPPER */}
         <div className="relative mt-20 h-[560px] sm:h-[580px] md:h-[600px] lg:h-[640px]">
-          {/* GLOBE */}
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-[520px] h-[520px] sm:w-[560px] sm:h-[560px] md:w-[620px] md:h-[620px] lg:w-[660px] lg:h-[660px]">
               <World data={sampleArcs} globeConfig={globeConfig} />
             </div>
           </div>
 
-          {/* LEFT INFO CARD */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -451,13 +458,14 @@ export default function GlobalNewsGlobe() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/90 dark:bg-black/50 border border-slate-200 dark:border-slate-800 px-4 py-3 rounded-2xl shadow-lg backdrop-blur-md w-52 text-sm"
           >
-            <p className="text-slate-600 dark:text-slate-300">Live insight</p>
+            <p className="text-slate-600 dark:text-slate-300">
+              {t("leftCard.line1")}
+            </p>
             <p className="font-semibold mt-1 text-slate-900 dark:text-white">
-              24/7 sources scanned day by day
+              {t("leftCard.line2")}
             </p>
           </motion.div>
 
-          {/* RIGHT INFO CARD */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -466,14 +474,13 @@ export default function GlobalNewsGlobe() {
             className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/90 dark:bg-black/50 border border-slate-200 dark:border-slate-800 px-4 py-3 rounded-2xl shadow-lg backdrop-blur-md w-52 text-sm"
           >
             <p className="text-slate-600 dark:text-slate-300">
-              Engagement boost
+              {t("rightCard.line1")}
             </p>
             <p className="font-semibold mt-1 text-indigo-600 dark:text-indigo-300">
-              +37% better open rates
+              {t("rightCard.line2")}
             </p>
           </motion.div>
 
-          {/* BOTTOM GRADIENT */}
           <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-white dark:to-black"></div>
         </div>
       </div>

@@ -1,0 +1,277 @@
+.
+├── README.md
+├── actions
+│   ├── delete-newsletter.ts
+│   ├── generate-newsletter.ts
+│   ├── index.ts
+│   ├── newsletter.ts
+│   ├── rss-article.ts
+│   ├── rss-feed.ts
+│   ├── rss-fetch.ts
+│   ├── save-newsletter-settings.ts
+│   ├── today-articles.ts
+│   ├── user-settings.ts
+│   └── user.ts
+├── app
+│   ├── (routes)
+│   ├── [locale]
+│   │   ├── dashboard
+│   │   │   ├── admin
+│   │   │   │   └── page.tsx
+│   │   │   ├── billing
+│   │   │   │   └── page.tsx
+│   │   │   ├── feeds
+│   │   │   │   └── page.tsx
+│   │   │   ├── generate
+│   │   │   │   └── page.tsx
+│   │   │   ├── history
+│   │   │   │   ├── [id]
+│   │   │   │   └── page.tsx
+│   │   │   ├── layout.tsx
+│   │   │   ├── page.tsx
+│   │   │   ├── settings
+│   │   │   │   └── page.tsx
+│   │   │   └── toaster-provider.tsx
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   └── sign-in
+│   │       └── [[...sign-in]]
+│   │           └── page.tsx
+│   ├── api
+│   │   ├── admin
+│   │   │   ├── cron-status
+│   │   │   │   └── route.ts
+│   │   │   └── schedules
+│   │   │       └── route.ts
+│   │   ├── cron
+│   │   │   └── send-newsletter
+│   │   │       └── route.ts
+│   │   └── newsletter
+│   │       ├── generate-stream
+│   │       │   └── route.ts
+│   │       ├── prepare
+│   │       │   └── route.ts
+│   │       └── send-email
+│   │           └── route.ts
+│   ├── components
+│   │   ├── dashboard
+│   │   │   ├── SideBar.tsx
+│   │   │   ├── admin
+│   │   │   │   └── admin-tools.tsx
+│   │   │   ├── feeds
+│   │   │   │   ├── add-feed-dialog.tsx
+│   │   │   │   ├── client-feed-page.tsx
+│   │   │   │   ├── date-range-picker.tsx
+│   │   │   │   ├── delete-feed-button.tsx
+│   │   │   │   ├── feed-list.tsx
+│   │   │   │   ├── feed-search.tsx
+│   │   │   │   ├── feeds-header.tsx
+│   │   │   │   └── sortable-item.tsx
+│   │   │   ├── newsletter
+│   │   │   │   ├── history
+│   │   │   │   ├── newsletter-display.tsx
+│   │   │   │   ├── newsletter-form.tsx
+│   │   │   │   ├── newsletter-generation-page.tsx
+│   │   │   │   ├── newsletter-generator.tsx
+│   │   │   │   ├── newsletter-loading-card.tsx
+│   │   │   │   ├── newsletter-set-time.tsx
+│   │   │   │   ├── template
+│   │   │   │   └── template-selector.tsx
+│   │   │   ├── pricing-cards.tsx
+│   │   │   ├── rss-feed-manager.tsx
+│   │   │   └── settings-form.tsx
+│   │   ├── landing
+│   │   │   ├── Buttons
+│   │   │   │   ├── CTAButtonClient.tsx
+│   │   │   │   └── CTAButtonServer.tsx
+│   │   │   ├── CategoriesShowcase.tsx
+│   │   │   ├── Features.tsx
+│   │   │   ├── Footer.tsx
+│   │   │   ├── Header.tsx
+│   │   │   ├── Hero.tsx
+│   │   │   ├── HeroVisual.tsx
+│   │   │   ├── HowItWorks.tsx
+│   │   │   ├── NewsGlobe.tsx
+│   │   │   ├── Pricing.tsx
+│   │   │   └── Testimonials.tsx
+│   │   └── providers
+│   │       └── plan-provider.tsx
+│   ├── globals.css
+│   └── layout.tsx
+├── biome.json
+├── components
+│   └── ui
+│       ├── animated-testimonials.tsx
+│       ├── badge.tsx
+│       ├── bento-grid.tsx
+│       ├── button.tsx
+│       ├── calendar.tsx
+│       ├── card.tsx
+│       ├── checkbox.tsx
+│       ├── dialog.tsx
+│       ├── draggable-card.tsx
+│       ├── globe.tsx
+│       ├── infinite-moving-cards.tsx
+│       ├── input.tsx
+│       ├── label.tsx
+│       ├── popover.tsx
+│       ├── resizable-navbar.tsx
+│       ├── scroll-area.tsx
+│       ├── select.tsx
+│       ├── separator.tsx
+│       ├── sheet.tsx
+│       ├── sidebar.tsx
+│       ├── skeleton.tsx
+│       ├── spinner.tsx
+│       ├── switch.tsx
+│       ├── tabs.tsx
+│       ├── textarea.tsx
+│       ├── tooltip.tsx
+│       └── vortex.tsx
+├── components.json
+├── data
+│   └── globe.json
+├── hooks
+│   └── use-mobile.ts
+├── i18n
+│   ├── messages
+│   │   ├── en.json
+│   │   └── tr.json
+│   ├── request.ts
+│   └── useChangeLocal.ts
+├── i18n.ts
+├── lib
+│   ├── auth
+│   │   └── helpers.ts
+│   ├── database
+│   │   ├── error-handler.ts
+│   │   └── prisma-helpers.ts
+│   ├── feeds.ts
+│   ├── newsletter
+│   │   ├── generate-for-cron.ts
+│   │   ├── prompt-builder.ts
+│   │   └── types.ts
+│   ├── plan.ts
+│   ├── prisma.ts
+│   ├── qstash.ts
+│   ├── rss
+│   │   ├── feed-refresh.ts
+│   │   ├── parser.ts
+│   │   └── types.ts
+│   ├── utils
+│   │   ├── cn.ts
+│   │   └── url.ts
+│   ├── utils.ts
+│   └── validation
+│       └── rss.ts
+├── next-env.d.ts
+├── next.config.ts
+├── node_modules
+│   ├── @ai-sdk
+│   │   ├── openai -> ../.pnpm/@ai-sdk+openai@2.0.72_zod@4.1.13/node_modules/@ai-sdk/openai
+│   │   └── react -> ../.pnpm/@ai-sdk+react@2.0.102_react@19.2.0_zod@4.1.13/node_modules/@ai-sdk/react
+│   ├── @biomejs
+│   │   └── biome -> ../.pnpm/@biomejs+biome@2.2.0/node_modules/@biomejs/biome
+│   ├── @clerk
+│   │   └── nextjs -> ../.pnpm/@clerk+nextjs@6.35.5_next@16.0.3_@opentelemetry+api@1.9.0_babel-plugin-react-compiler@1_4cffd57c16f953cc036e20380c300136/node_modules/@clerk/nextjs
+│   ├── @dnd-kit
+│   │   ├── core -> ../.pnpm/@dnd-kit+core@6.3.1_react-dom@19.2.0_react@19.2.0__react@19.2.0/node_modules/@dnd-kit/core
+│   │   ├── sortable -> ../.pnpm/@dnd-kit+sortable@10.0.0_@dnd-kit+core@6.3.1_react-dom@19.2.0_react@19.2.0__react@19.2.0__react@19.2.0/node_modules/@dnd-kit/sortable
+│   │   └── utilities -> ../.pnpm/@dnd-kit+utilities@3.2.2_react@19.2.0/node_modules/@dnd-kit/utilities
+│   ├── @prisma
+│   │   ├── client -> ../.pnpm/@prisma+client@6.19.0_prisma@6.19.0_typescript@5.9.3__typescript@5.9.3/node_modules/@prisma/client
+│   │   └── extension-accelerate -> ../.pnpm/@prisma+extension-accelerate@2.0.2_@prisma+client@6.19.0_prisma@6.19.0_typescript@5.9.3__typescript@5.9.3_/node_modules/@prisma/extension-accelerate
+│   ├── @radix-ui
+│   │   ├── react-checkbox -> ../.pnpm/@radix-ui+react-checkbox@1.3.3_@types+react-dom@19.2.3_@types+react@19.2.7__@types+reac_fcb881b1e73d481c735768e58dfd4a4f/node_modules/@radix-ui/react-checkbox
+│   │   ├── react-dialog -> ../.pnpm/@radix-ui+react-dialog@1.1.15_@types+react-dom@19.2.3_@types+react@19.2.7__@types+react_7bca654b4a165e2aaeb677b7be7d3cff/node_modules/@radix-ui/react-dialog
+│   │   ├── react-label -> ../.pnpm/@radix-ui+react-label@2.1.8_@types+react-dom@19.2.3_@types+react@19.2.7__@types+react@1_40c2d5246712c6eaa4eeb3b25ed464ca/node_modules/@radix-ui/react-label
+│   │   ├── react-popover -> ../.pnpm/@radix-ui+react-popover@1.1.15_@types+react-dom@19.2.3_@types+react@19.2.7__@types+reac_22fd869f2fbef1b398318fe9ab4df5ce/node_modules/@radix-ui/react-popover
+│   │   ├── react-scroll-area -> ../.pnpm/@radix-ui+react-scroll-area@1.2.10_@types+react-dom@19.2.3_@types+react@19.2.7__@types+_8bfc6dee9ba7b204975c841a7379ffe4/node_modules/@radix-ui/react-scroll-area
+│   │   ├── react-select -> ../.pnpm/@radix-ui+react-select@2.2.6_@types+react-dom@19.2.3_@types+react@19.2.7__@types+react@_ab138c1bfb15f396e13abf4924d8d5ef/node_modules/@radix-ui/react-select
+│   │   ├── react-separator -> ../.pnpm/@radix-ui+react-separator@1.1.8_@types+react-dom@19.2.3_@types+react@19.2.7__@types+rea_1bbd2785d460a52535f03822effdf7f5/node_modules/@radix-ui/react-separator
+│   │   ├── react-slot -> ../.pnpm/@radix-ui+react-slot@1.2.4_@types+react@19.2.7_react@19.2.0/node_modules/@radix-ui/react-slot
+│   │   ├── react-switch -> ../.pnpm/@radix-ui+react-switch@1.2.6_@types+react-dom@19.2.3_@types+react@19.2.7__@types+react@_893bb09b4174350b221c4552d522471a/node_modules/@radix-ui/react-switch
+│   │   ├── react-tabs -> ../.pnpm/@radix-ui+react-tabs@1.1.13_@types+react-dom@19.2.3_@types+react@19.2.7__@types+react@1_01bb79b2c3660a5119ab00e2bab809b1/node_modules/@radix-ui/react-tabs
+│   │   └── react-tooltip -> ../.pnpm/@radix-ui+react-tooltip@1.2.8_@types+react-dom@19.2.3_@types+react@19.2.7__@types+react_eed5a66450b80cb577f0d7d9f4d01cc3/node_modules/@radix-ui/react-tooltip
+│   ├── @react-three
+│   │   ├── drei -> ../.pnpm/@react-three+drei@10.7.7_@react-three+fiber@9.0.0-alpha.8_@types+react@19.2.7_react-dom_1d5b7ebd21d5b7347f40e9844fbbc641/node_modules/@react-three/drei
+│   │   └── fiber -> ../.pnpm/@react-three+fiber@9.0.0-alpha.8_@types+react@19.2.7_react-dom@19.2.0_react@19.2.0__react@19.2.0_three@0.181.2/node_modules/@react-three/fiber
+│   ├── @tabler
+│   │   └── icons-react -> ../.pnpm/@tabler+icons-react@3.35.0_react@19.2.0/node_modules/@tabler/icons-react
+│   ├── @tailwindcss
+│   │   └── postcss -> ../.pnpm/@tailwindcss+postcss@4.1.17/node_modules/@tailwindcss/postcss
+│   ├── @types
+│   │   ├── node -> ../.pnpm/@types+node@20.19.25/node_modules/@types/node
+│   │   ├── react -> ../.pnpm/@types+react@19.2.7/node_modules/@types/react
+│   │   ├── react-dom -> ../.pnpm/@types+react-dom@19.2.3_@types+react@19.2.7/node_modules/@types/react-dom
+│   │   └── three -> ../.pnpm/@types+three@0.181.0/node_modules/@types/three
+│   ├── @upstash
+│   │   └── qstash -> ../.pnpm/@upstash+qstash@2.8.4/node_modules/@upstash/qstash
+│   ├── add -> .pnpm/add@2.0.6/node_modules/add
+│   ├── ai -> .pnpm/ai@5.0.102_zod@4.1.13/node_modules/ai
+│   ├── babel-plugin-react-compiler -> .pnpm/babel-plugin-react-compiler@1.0.0/node_modules/babel-plugin-react-compiler
+│   ├── class-variance-authority -> .pnpm/class-variance-authority@0.7.1/node_modules/class-variance-authority
+│   ├── clsx -> .pnpm/clsx@2.1.1/node_modules/clsx
+│   ├── date-fns -> .pnpm/date-fns@4.1.0/node_modules/date-fns
+│   ├── date-fns-tz -> .pnpm/date-fns-tz@3.2.0_date-fns@4.1.0/node_modules/date-fns-tz
+│   ├── dotenv -> .pnpm/dotenv@17.2.3/node_modules/dotenv
+│   ├── face-api.js -> .pnpm/face-api.js@0.22.2/node_modules/face-api.js
+│   ├── framer-motion -> .pnpm/framer-motion@12.23.24_react-dom@19.2.0_react@19.2.0__react@19.2.0/node_modules/framer-motion
+│   ├── html2canvas -> .pnpm/html2canvas@1.4.1/node_modules/html2canvas
+│   ├── jspdf -> .pnpm/jspdf@3.0.4/node_modules/jspdf
+│   ├── lucide-react -> .pnpm/lucide-react@0.554.0_react@19.2.0/node_modules/lucide-react
+│   ├── motion -> .pnpm/motion@12.23.24_react-dom@19.2.0_react@19.2.0__react@19.2.0/node_modules/motion
+│   ├── next -> .pnpm/next@16.0.3_@opentelemetry+api@1.9.0_babel-plugin-react-compiler@1.0.0_react-dom@19.2.0_react@19.2.0__react@19.2.0/node_modules/next
+│   ├── next-intl -> .pnpm/next-intl@4.4.0_next@16.0.3_@opentelemetry+api@1.9.0_babel-plugin-react-compiler@1.0.0__29d3fa091b9449bfbd3b6a66f54747e5/node_modules/next-intl
+│   ├── openai -> .pnpm/openai@6.9.1_zod@4.1.13/node_modules/openai
+│   ├── pnpm -> .pnpm/pnpm@10.23.0/node_modules/pnpm
+│   ├── postprocessing -> .pnpm/postprocessing@6.38.0_three@0.181.2/node_modules/postprocessing
+│   ├── prisma -> .pnpm/prisma@6.19.0_typescript@5.9.3/node_modules/prisma
+│   ├── react -> .pnpm/react@19.2.0/node_modules/react
+│   ├── react-day-picker -> .pnpm/react-day-picker@9.11.2_react@19.2.0/node_modules/react-day-picker
+│   ├── react-dom -> .pnpm/react-dom@19.2.0_react@19.2.0/node_modules/react-dom
+│   ├── react-markdown -> .pnpm/react-markdown@10.1.0_@types+react@19.2.7_react@19.2.0/node_modules/react-markdown
+│   ├── resend -> .pnpm/resend@6.5.2/node_modules/resend
+│   ├── rss-parser -> .pnpm/rss-parser@3.13.0/node_modules/rss-parser
+│   ├── simplex-noise -> .pnpm/simplex-noise@4.0.3/node_modules/simplex-noise
+│   ├── sonner -> .pnpm/sonner@2.0.7_react-dom@19.2.0_react@19.2.0__react@19.2.0/node_modules/sonner
+│   ├── tailwind-merge -> .pnpm/tailwind-merge@3.4.0/node_modules/tailwind-merge
+│   ├── tailwindcss -> .pnpm/tailwindcss@4.1.17/node_modules/tailwindcss
+│   ├── three -> .pnpm/three@0.181.2/node_modules/three
+│   ├── three-globe -> .pnpm/three-globe@2.45.0_three@0.181.2/node_modules/three-globe
+│   ├── toaster -> .pnpm/toaster@0.1.2/node_modules/toaster
+│   ├── tsx -> .pnpm/tsx@4.20.6/node_modules/tsx
+│   ├── tw-animate-css -> .pnpm/tw-animate-css@1.4.0/node_modules/tw-animate-css
+│   ├── typescript -> .pnpm/typescript@5.9.3/node_modules/typescript
+│   └── zod -> .pnpm/zod@4.1.13/node_modules/zod
+├── package.json
+├── pnpm-lock.yaml
+├── postcss.config.mjs
+├── prisma
+│   └── schema.prisma
+├── proxy.ts
+├── public
+│   ├── AIResponse.svg
+│   ├── Analytics.svg
+│   ├── Article.svg
+│   ├── Automation.svg
+│   ├── Brad Pitt.webp
+│   ├── CR7.jpg
+│   ├── Culture.png
+│   ├── Customization.svg
+│   ├── ElonMusk.jpg
+│   ├── Finance.png
+│   ├── Processing.svg
+│   ├── Science.png
+│   ├── Selection.svg
+│   ├── SetTime.svg
+│   ├── Sports.png
+│   ├── Subs.svg
+│   ├── Tech.png
+│   ├── Technology.png
+│   ├── Trump.avif
+│   └── WorldNews.png
+├── structure.txt
+└── tsconfig.json
+
+128 directories, 147 files

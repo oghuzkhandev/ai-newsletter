@@ -1,14 +1,383 @@
 {
-    "nav": {
+  "nav": {
+    "features": "Features",
+    "pricing": "Pricing",
+    "howitworks": "How It Works",
+    "login": "Login"
+  },
+  "banner": {
+    "title": "Your next-gen AI-powered newsletter assistant is live!",
+    "description": "Fresh, automated news delivered daily curated, summarized and personalized just for you."
+  },
+  "hero": {
+    "badgeNew": "New",
+    "badgeSubtitle": "100+ curated RSS sources",
+    "title1": "Your AI-powered",
+    "title2": "newsletter engine",
+    "subtitle": "Build editorial-quality newsletters in minutes. Pick RSS feeds, let AI summarize, and schedule daily sendall personalized to your voice.",
+    "features": {
+      "ai": "AI Summarization",
+      "auto": "Auto-scheduling",
+      "instant": "Instant delivery"
+    },
+    "buttonStart": "Start for Free",
+    "rating": {
+      "excellent": "Excellent",
+      "ratedBy": "Rated by",
+      "verifiedCreators": "verified creators"
+    }
+  },
+  "categories": {
+    "badge": "Content Categories",
+    "title": {
+      "line1": "Curate from",
+      "line2": "every corner of the web"
+    },
+    "subtitle": "Access premium content from 50,000+ trusted sources across 12 major categories",
+    "description": "Our AI intelligently filters and ranks content to deliver only the most relevant and high-quality stories to your audience",
+    "stats": {
+      "sources": "Sources",
+      "categories": "Categories",
+      "updates": "Updates",
+      "accuracy": "Accuracy"
+    },
+    "cta": {
+      "text": "Explore all categories and customize your feed selection"
+    },
+    "culture": {
+      "title": "Culture & Arts",
+      "source": "The Guardian, Artforum, NYT Arts",
+      "quote": "Discover the latest in art, music, literature, and cultural movements worldwide"
+    },
+    "technology": {
+      "title": "Technology",
+      "source": "TechCrunch, Wired, The Verge",
+      "quote": "Breaking tech news, AI developments, and digital innovation insights"
+    },
+    "fashion": {
+      "title": "Fashion & Style",
+      "source": "Vogue, WWD, Business of Fashion",
+      "quote": "Runway trends, street style, and the business behind global fashion"
+    },
+    "health": {
+      "title": "Health & Wellness",
+      "source": "Healthline, Mayo Clinic, WebMD",
+      "quote": "Evidence-based health news, fitness trends, and mental wellness insights"
+    },
+    "world": {
+      "title": "World News",
+      "source": "Reuters, BBC, Associated Press",
+      "quote": "Global events, politics, and international affairs from trusted sources"
+    },
+    "finance": {
+      "title": "Finance & Markets",
+      "source": "Bloomberg, WSJ, Financial Times",
+      "quote": "Market analysis, economic trends, and investment insights"
+    },
+    "education": {
+      "title": "Education & Learning",
+      "source": "EdWeek, Chronicle, MIT News",
+      "quote": "Educational technology, research breakthroughs, and learning innovations"
+    },
+    "entertainment": {
+      "title": "Entertainment",
+      "source": "Variety, Hollywood Reporter, IGN",
+      "quote": "Movies, TV, gaming, and pop culture from industry leaders"
+    },
+    "sports": {
+      "title": "Sports",
+      "source": "ESPN, The Athletic, Sky Sports",
+      "quote": "Live scores, analysis, and breaking news from all major leagues"
+    },
+    "science": {
+      "title": "Science & Research",
+      "source": "Nature, Science Magazine, NASA",
+      "quote": "Scientific discoveries, space exploration, and research breakthroughs"
+    }
+  },
+  "features": {
+    "badge": "Powerful Features",
+    "title1": "Transform RSS Feeds into",
+    "title2": "Beautiful Newsletters",
+    "subtitle": "AI-powered summarization with automated delivery.",
+    "ctaHint": "Join thousands of creators who save hours every week ✨",
+
+    "items": {
+      "ai": {
+        "title": "AI Summaries Engine",
+        "description": "Smart, accurate, tone-adaptive summarization."
+      },
+      "curation": {
+        "title": "Smart Curation",
+        "description": "Duplicate removal & relevance scoring."
+      },
+      "design": {
+        "title": "Beautiful Templates",
+        "description": "Professional layouts that match your brand."
+      },
+      "timer": {
+        "title": "Set & Forget",
+        "description": "Auto-scheduling for consistent delivery."
+      },
+      "analytics": {
+        "title": "Analytics Dashboard",
+        "description": "Track opens, engagement & performance."
+      },
+      "send": {
+        "title": "Instant Distribution",
+        "description": "Send newsletters to thousands instantly."
+      }
+    }
+  },
+  "howitworks": {
+    "badge": "How It Works",
+
+    "title": {
+      "line1": "Your AI assistant that follows the news",
+      "line2": "and builds your briefing for you"
+    },
+
+    "subtitle": "Add your favorite sources, define your audience, and let the system turn raw headlines into a clean, curated and summarized newsletter.",
+
+    "tabs": {
+      "connect": "1. Connect",
+      "train": "2. Teach",
+      "design": "3. Design",
+      "automate": "4. Automate"
+    },
+
+    "connect": {
+      "title": "Bring all your sources into one place",
+      "description": "Sports, technology, science, business, world news… Instead of jumping between tabs, apps and RSS lists, gather everything into a single clean feed.",
+      "step1": "Add the websites, blogs and news sources you already follow or choose from ready-made categories like Technology, Science, Sports, Finance and World News.",
+      "step2": "Set a priority level for each source: 'High priority', 'If relevant', or 'Low priority'. Your feed adapts based on what's important to you.",
+      "step3": "The system refreshes RSS feeds in the background, filters out duplicates, broken links or outdated entries, and keeps only clean, usable content.",
+      "step4": "What you get is a single, organized content queue refreshed, deduplicated and ready for summarization."
+    },
+
+    "train": {
+      "title": "Teach your assistant what matters",
+      "description": "Simply interact with the content you enjoy your assistant gradually adapts to your taste and your audience’s expectations.",
+      "step1": "As you open, save or highlight stories, the system learns which topics and tones you care about.",
+      "step2": "Hide irrelevant or low-quality items; similar stories will appear far less in future briefings.",
+      "step3": "Related stories from different sources are automatically merged into one clean block, instead of five separate links.",
+      "step4": "Each article gets a short, human-readable summary so your readers can understand the big picture in minutes.",
+      "step5": "Over time your briefings turn into a personalized feed tuned to your interests and the level of detail your audience needs."
+    },
+
+    "design": {
+      "title": "Shape your briefing to match your brand",
+      "description": "Choose the tone, structure and identity of your newsletter the system adapts, but the creative direction stays yours.",
+      "step1": "Choose the overall layout: Highlights, Industry Rundown, Deep Dives, Light Content, Editor’s Note and more reorder sections as you like.",
+      "step2": "In User Settings, define your newsletter name, company name, sender name, sender email, short description and footer details.",
+      "step3": "Pick your default tone: analytical, conversational, concise or storytelling summaries are automatically generated in that style.",
+      "step4": "Describe your brand voice, target audience and industry context; the AI uses this guidance in every generated block.",
+      "step5": "Add personal notes, special announcements or editorial comments to give each issue a human, authentic touch."
+    },
+
+    "automate": {
+      "title": "Automate sending and forget the schedule",
+      "description": "Set it once the system collects, summarizes and prepares content, then sends it at the right time.",
+      "step1": "Choose sending frequency: daily, weekly or weekdays only. The system gathers content accordingly.",
+      "step2": "Set a delivery time; the newsletter is prepared automatically before that moment.",
+      "step3": "Enable auto-send or manually review each issue before sending the choice is yours.",
+      "step4": "Every sent issue is logged with recipient, timestamp and status information for easy tracking.",
+      "step5": "Browse your sending history to see which rhythm works best and fine-tune your content flow over time."
+    }
+  },
+  "testimonials": {
+    "badge": "Testimonials",
+
+    "titleLine1": "What our users",
+    "titleLine2": "are saying about us",
+    "subtitle": "Leaders and professionals rely on our platform to stay informed effortlessly.",
+
+    "items": [
+      {
+        "quote": "This platform makes it effortless for me to stay updated on global football news. It keeps me informed, focused, and saves valuable time every day.",
+        "name": "Cristiano Ronaldo",
+        "designation": "Al Nassr Footballer",
+        "src": "/CR7.jpg"
+      },
+      {
+        "quote": "This tool keeps me ahead of every major technology update. Clean, fast, and AI-powered exactly what I need to keep building the future.",
+        "name": "Elon Musk",
+        "designation": "CEO of SpaceX & Tesla",
+        "src": "/ElonMusk.jpg"
+      },
+      {
+        "quote": "I can instantly follow global developments. Business, politics, economics nothing escapes me anymore.",
+        "name": "Donald Trump",
+        "designation": "45th President of the United States",
+        "src": "/Trump.avif"
+      },
+      {
+        "quote": "Media trends, entertainment, global culture everything reaches me through clean, fast AI summaries. Staying informed has never been this effortless.",
+        "name": "Brad Pitt",
+        "designation": "Actor & Producer",
+        "src": "/Bradpitt.jpg"
+      }
+    ]
+  },
+  "pricing": {
+    "badge": "SUBSCRIPTION PLANS",
+    "title": "Simple, transparent pricing",
+    "subtitle": "Build your own AI-powered news digest from global RSS sources — choose how deep you want to go.",
+
+    "whyUpgrade": {
+      "title": "Why upgrade from Starter to Pro?",
+      "cards": [
+        {
+          "title": "More content, more context",
+          "text": "Starter includes up to 5 RSS sources and 1 daily summary. Pro unlocks unlimited feeds, category access, and up to 3 AI-powered digests."
+        },
+        {
+          "title": "Stronger AI & better design",
+          "text": "Move from basic summaries to advanced long-form AI analysis, smarter templates, and more powerful newsletter generation."
+        },
+        {
+          "title": "Full automation & alerts",
+          "text": "Pro lets you automate newsletter creation and delivery, and receive trending alerts without manually checking the app."
+        }
+      ]
+    },
+
+    "compare": {
+      "title": "Compare plans",
       "features": "Features",
-      "pricing": "Pricing",
-      "demo": "Demo",
-      "login": "Login"
+      "starter": "Starter",
+      "pro": "Pro",
+
+      "rows": [
+        { "label": "Monthly price", "starter": "$7.50", "pro": "$20" },
+        { "label": "RSS sources", "starter": "Up to 5", "pro": "Unlimited" },
+        {
+          "label": "Daily AI summaries",
+          "starter": "1 per day",
+          "pro": "Up to 3 per day"
+        },
+        {
+          "label": "AI Newsletter Engine",
+          "starter": "Basic",
+          "pro": "Advanced"
+        },
+        {
+          "label": "Newsletter templates",
+          "starter": "Basic templates",
+          "pro": "Premium templates"
+        },
+        {
+          "label": "Max AI summary length",
+          "starter": "Up to 300 words",
+          "pro": "1000+ words"
+        },
+        {
+          "label": "RSS categories",
+          "starter": "Limited",
+          "pro": "Hundreds of categories"
+        },
+        {
+          "label": "Latest articles in dashboard",
+          "starter": "check",
+          "pro": "check"
+        },
+        {
+          "label": "Email notification when ready",
+          "starter": "check",
+          "pro": "check"
+        },
+        { "label": "Scheduled automation", "starter": "minus", "pro": "check" },
+        { "label": "Trending story alerts", "starter": "minus", "pro": "check" }
+      ]
     },
-    "banner": {
-      "title": "Your next-gen AI-powered newsletter assistant is live!",
-      "description": "Fresh, automated news delivered daily — curated, summarized and personalized just for you."
+
+    "faqTitle": "Frequently Asked Questions",
+    "faqs": [
+      {
+        "question": "What's the difference between Starter and Pro?",
+        "answer": "Starter includes basic limits; Pro unlocks unlimited feeds, advanced AI summaries, automation, and premium features."
+      },
+      {
+        "question": "Can I switch plans later?",
+        "answer": "Yes — you can upgrade or downgrade anytime. Upgrades take effect immediately."
+      },
+      {
+        "question": "Do you lock me into a contract?",
+        "answer": "No. All plans are month-to-month with no long-term commitments."
+      },
+      {
+        "question": "What happens if I hit my Starter limits?",
+        "answer": "You'll be prompted to upgrade. Your data is never deleted or throttled."
+      }
+    ]
+  },
+  "globe": {
+    "title": "Global news — curated by AI, delivered daily",
+    "subtitle": "AI scans global news sources, filters noise, summarizes key insights, and delivers a personal digest to your inbox.",
+    "badge1": "🌍 Global coverage",
+    "badge2": "🤖 AI-powered summaries",
+    "badge3": "📩 Daily email digest",
+
+    "leftCard": {
+      "line1": "Live insight",
+      "line2": "24/7 sources scanned day by day"
     },
-    "logo": "Oghuzkhan"
+    "rightCard": {
+      "line1": "Engagement boost",
+      "line2": "+37% better open rates"
+    }
+  },
+  "footer": {
+    "brand": {
+      "name": "GlobeBrief",
+      "description": "Transform your RSS feeds into beautiful, AI-curated newsletters. Save hours every week with intelligent automation."
+    },
+    "newsletter": {
+      "title": "Stay Updated",
+      "subtitle": "Get product news & tips",
+      "button": "Subscribe"
+    },
+    "columns": {
+      "product": {
+        "title": "Product",
+        "links": [
+          { "label": "Features", "href": "#features" },
+          { "label": "Pricing", "href": "#pricing" },
+          { "label": "AI Engine", "href": "#" },
+          { "label": "Templates", "href": "#" }
+        ]
+      },
+      "resources": {
+        "title": "Resources",
+        "links": [
+          { "label": "Documentation", "href": "#" },
+          { "label": "API Reference", "href": "#" },
+          { "label": "Blog", "href": "#" },
+          { "label": "Help Center", "href": "#" }
+        ]
+      },
+      "company": {
+        "title": "Company",
+        "links": [
+          { "label": "About Us", "href": "#" },
+          { "label": "Careers", "href": "#", "badge": "Hiring" },
+          { "label": "Contact", "href": "#" },
+          { "label": "Press Kit", "href": "#" }
+        ]
+      },
+      "legal": {
+        "title": "Legal",
+        "links": [
+          { "label": "Privacy Policy", "href": "#" },
+          { "label": "Terms of Service", "href": "#" },
+          { "label": "Cookie Policy", "href": "#" },
+          { "label": "GDPR", "href": "#" }
+        ]
+      }
+    },
+    "bottom": {
+      "crafted": "Crafted with care.",
+      "designedBy": "Designed by"
+    }
   }
-  
+}

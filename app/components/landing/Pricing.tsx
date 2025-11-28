@@ -1,233 +1,141 @@
 "use client";
+
 import { PricingTable } from "@clerk/nextjs";
-import { Check, Minus } from "lucide-react";
+import { Check, Minus, ChevronDown, Wallet } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function Pricing() {
+  const t = useTranslations("pricing");
+
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i);
 
-  const faqs = [
-    {
-      question: "What's the difference between Starter and Pro?",
-      answer:
-        "Starter gives you 1 daily AI summary and up to 5 RSS sources. Pro unlocks unlimited feeds, up to 3 daily digests, stronger AI summarization, full automation, premium templates, and alert-based notifications.",
-    },
-    {
-      question: "Can I switch plans later?",
-      answer:
-        "Absolutely. You can upgrade or downgrade at any time. Upgrades apply instantly; downgrades take effect at the end of your billing cycle.",
-    },
-    {
-      question: "Do you lock me into a contract?",
-      answer:
-        "No long-term commitments. All plans are month-to-month and you can cancel directly from your account settings whenever you want.",
-    },
-    {
-      question: "What happens if I hit my limits on Starter?",
-      answer:
-        "If you exceed your allowed sources or summaries, we'll prompt you to upgrade—your data is never deleted or throttled.",
-    },
-  ];
+  const faqs = t.raw("faqs");
 
   return (
-    <div className="w-full pb-32 pt-24" id="pricing">
+    <div className="mx-auto max-w-7xl" id="pricing">
+      <div className="flex items-center justify-center w-full">
+        <div className="flex items-center mb-10 gap-2 px-6 py-2 rounded-full bg-white dark:bg-slate-900 border border-orange-300 dark:border-slate-800 shadow-md shadow-orange-500">
+          <Wallet className="w-6 h-6" />
+          <span className="text-sm font-bold bg-linear-to-r from-red-500 to-orange-500 bg-clip-text text-transparent uppercase tracking-wider">
+            {t("badge")}
+          </span>
+        </div>
+      </div>
+      {/* HEADER */}
       <div className="flex max-w-7xl mx-auto text-center gap-10 px-4">
         <div className="whitespace-normal wrap-break-word flex-2">
-          <h1 className="text-4xl font-bold tracking-tight text-slate-900">
-            Simple, transparent pricing
+          <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
+            {t("title")}
           </h1>
-          <p className="mt-4 text-lg text-slate-600">
-            Build your own AI-powered news digest from all around of the world RSS sources – pick the plan that
-            matches how deep you want to go.
+          <p className="mt-4 text-lg text-slate-600 dark:text-slate-300">
+            {t("subtitle")}
           </p>
         </div>
+
         <div className="flex-1">
           <Image src="/Subs.svg" alt="Subs" height={250} width={250} />
         </div>
       </div>
 
-      {/* Clerk Pricing Table */}
+      {/* CLERK PRICING TABLE */}
       <div className="mt-16 flex justify-center w-full ">
         <div className="w-full max-w-4xl">
           <PricingTable />
         </div>
       </div>
 
-      {/* Why Upgrade */}
+      {/* WHY UPGRADE */}
       <section className="mt-24 max-w-5xl mx-auto px-4">
-        <h2 className="text-3xl font-semibold text-slate-900 text-center mb-10">
-          Why upgrade from Starter to Pro?
+        <h2 className="text-3xl font-semibold text-slate-900 dark:text-slate-100 text-center mb-10">
+          {t("whyUpgrade.title")}
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
-            <h3 className="font-semibold text-xl text-indigo-600">
-              More content, more context
-            </h3>
-            <p className="text-slate-600 mt-3">
-              Starter gives you up to 5 RSS sources and 1 daily summary. Pro unlocks unlimited
-              feeds, access to hundreds of categories, and up to 3 AI-powered daily digests.
-            </p>
-          </div>
-
-          <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
-            <h3 className="font-semibold text-xl text-indigo-600">
-              Stronger AI & better design
-            </h3>
-            <p className="text-slate-600 mt-3">
-              Move from basic 300-word summaries and simple templates to advanced long-form
-              AI summaries (1,000+ words), premium newsletter designs, and a more powerful
-              AI engine.
-            </p>
-          </div>
-
-          <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
-            <h3 className="font-semibold text-xl text-indigo-600">
-              Full automation & alerts
-            </h3>
-            <p className="text-slate-600 mt-3">
-              With Pro you can automatically create and deliver newsletters on a schedule, and
-              get trending story + category-based alerts instead of manually checking the app.
-            </p>
-          </div>
+          {t.raw("whyUpgrade.cards").map((card: any, i: number) => (
+            <div
+              key={i}
+              className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6 shadow-sm hover:shadow-lg transition"
+            >
+              <h3 className="font-semibold text-xl text-indigo-600 dark:text-indigo-400">
+                {card.title}
+              </h3>
+              <p className="text-slate-600 dark:text-slate-300 mt-3">
+                {card.text}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Comparison Table */}
+      {/* COMPARISON TABLE */}
       <section className="mt-24 max-w-5xl mx-auto px-4">
-        <h2 className="text-3xl font-semibold text-slate-900 text-center mb-10">
-          Compare plans
+        <h2 className="text-3xl font-semibold text-slate-900 dark:text-slate-100 text-center mb-10">
+          {t("compare.title")}
         </h2>
 
-        <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+        <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm">
           <table className="w-full text-left text-sm">
-            <thead className="bg-slate-50 text-slate-700 border-b">
+            <thead className="bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-b dark:border-slate-700">
               <tr>
-                <th className="p-4 font-semibold">Features</th>
-                <th className="p-4 font-semibold text-center">Starter</th>
-                <th className="p-4 font-semibold text-center">Pro</th>
+                <th className="p-4 font-semibold">{t("compare.features")}</th>
+                <th className="p-4 font-semibold text-center">
+                  {t("compare.starter")}
+                </th>
+                <th className="p-4 font-semibold text-center">
+                  {t("compare.pro")}
+                </th>
               </tr>
             </thead>
 
             <tbody>
-              <tr className="border-b">
-                <td className="p-4">Monthly price</td>
-                <td className="p-4 text-center">$7.50 / month</td>
-                <td className="p-4 text-center font-medium">$20 / month</td>
-              </tr>
-
-              <tr className="border-b">
-                <td className="p-4">RSS sources</td>
-                <td className="p-4 text-center">Up to 5</td>
-                <td className="p-4 text-center font-medium">Unlimited</td>
-              </tr>
-
-              <tr className="border-b">
-                <td className="p-4">AI-powered daily summaries</td>
-                <td className="p-4 text-center">1 per day</td>
-                <td className="p-4 text-center font-medium">Up to 3 per day</td>
-              </tr>
-
-              <tr className="border-b">
-                <td className="p-4">AI Newsletter Engine</td>
-                <td className="p-4 text-center">Custom AI Newsletter Engine</td>
-                <td className="p-4 text-center font-medium">
-                  Advanced AI Newsletter Engine
-                </td>
-              </tr>
-
-              <tr className="border-b">
-                <td className="p-4">Newsletter design & templates</td>
-                <td className="p-4 text-center">Basic templates</td>
-                <td className="p-4 text-center font-medium">Premium templates</td>
-              </tr>
-
-              <tr className="border-b">
-                <td className="p-4">Max AI summary length</td>
-                <td className="p-4 text-center">Up to 300 words</td>
-                <td className="p-4 text-center font-medium">1,000+ words</td>
-              </tr>
-
-              <tr className="border-b">
-                <td className="p-4">Access to RSS categories</td>
-                <td className="p-4 text-center">
-                  Limited, based on selected sources
-                </td>
-                <td className="p-4 text-center font-medium">
-                  Access to hundreds of categories and feeds
-                </td>
-              </tr>
-
-              <tr className="border-b">
-                <td className="p-4">View latest articles in dashboard</td>
-                <td className="p-4 text-center">
-                  <Check className="h-5 w-5 mx-auto text-emerald-600" />
-                </td>
-                <td className="p-4 text-center">
-                  <Check className="h-5 w-5 mx-auto text-emerald-600" />
-                </td>
-              </tr>
-
-              <tr className="border-b">
-                <td className="p-4">
-                  Email notification when daily newsletter is ready
-                </td>
-                <td className="p-4 text-center">
-                  <Check className="h-5 w-5 mx-auto text-emerald-600" />
-                </td>
-                <td className="p-4 text-center">
-                  <Check className="h-5 w-5 mx-auto text-emerald-600" />
-                </td>
-              </tr>
-
-              <tr className="border-b">
-                <td className="p-4">
-                  Automatically create & deliver on a schedule (Daily / Weekly)
-                </td>
-                <td className="p-4 text-center">
-                  <Minus className="h-5 w-5 mx-auto text-slate-400" />
-                </td>
-                <td className="p-4 text-center">
-                  <Check className="h-5 w-5 mx-auto text-emerald-600" />
-                </td>
-              </tr>
-
-              <tr>
-                <td className="p-4">
-                  Trending story alerts & category-based notifications
-                </td>
-                <td className="p-4 text-center">
-                  <Minus className="h-5 w-5 mx-auto text-slate-400" />
-                </td>
-                <td className="p-4 text-center">
-                  <Check className="h-5 w-5 mx-auto text-emerald-600" />
-                </td>
-              </tr>
+              {t.raw("compare.rows").map((row: any, i: number) => (
+                <tr key={i} className="border-b dark:border-slate-800">
+                  <td className="p-4">{row.label}</td>
+                  <td className="p-4 text-center">
+                    {row.starter === "check" ? (
+                      <Check className="h-5 w-5 mx-auto text-emerald-600" />
+                    ) : row.starter === "minus" ? (
+                      <Minus className="h-5 w-5 mx-auto text-slate-400" />
+                    ) : (
+                      row.starter
+                    )}
+                  </td>
+                  <td className="p-4 text-center font-medium">
+                    {row.pro === "check" ? (
+                      <Check className="h-5 w-5 mx-auto text-emerald-600" />
+                    ) : row.pro === "minus" ? (
+                      <Minus className="h-5 w-5 mx-auto text-slate-400" />
+                    ) : (
+                      row.pro
+                    )}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
       </section>
 
-      {/* PREMIUM FAQ */}
-      <section className="mt-24 max-w-4xl mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-14 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-          Frequently Asked Questions
+      {/* FAQ */}
+      <section className="mt-24 max-w-4xl mx-auto px-4 mb-10">
+        <h2 className="text-4xl font-bold text-center mb-14 bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+          {t("faqTitle")}
         </h2>
 
         <div className="space-y-4">
-          {faqs.map((faq, i) => (
+          {faqs.map((faq: any, i: number) => (
             <div
               key={i}
-              className="border border-slate-200 rounded-2xl bg-white/70 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300"
+              className="border border-slate-200 dark:border-slate-700 rounded-2xl bg-white/70 dark:bg-white/10 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300"
             >
               <button
                 onClick={() => toggle(i)}
                 className="flex justify-between items-center w-full p-6 text-left"
               >
-                <span className="text-lg font-medium text-slate-900">
+                <span className="text-lg font-medium text-slate-900 dark:text-slate-100">
                   {faq.question}
                 </span>
                 <ChevronDown
@@ -238,7 +146,7 @@ export default function Pricing() {
               </button>
 
               {openIndex === i && (
-                <div className="px-6 pb-6 pt-0 text-slate-600 animate-fadeIn">
+                <div className="px-6 pb-6 pt-0 text-slate-600 dark:text-slate-300 animate-fadeIn">
                   {faq.answer}
                 </div>
               )}

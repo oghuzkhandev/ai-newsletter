@@ -1,14 +1,391 @@
 {
-    "nav": {
+  "nav": {
+    "features": "Özellikler",
+    "pricing": "Fiyatlandırma",
+    "howitworks": "Nasıl Çalışır",
+    "login": "Giriş Yap"
+  },
+  "banner": {
+    "title": "Yeni nesil Yapay zeka destekli bülten asistanınız yayında!",
+    "description": "Günlük kişiselleştirilmiş haber özetleri tamamen otomatik, tamamen size özel."
+  },
+  "hero": {
+    "badgeNew": "YENİ",
+    "badgeSubtitle": "100+ seçilmiş RSS kaynağı",
+    "title1": "Yapay zeka destekli",
+    "title2": "haber bülteniniz",
+    "subtitle": "Editoryal kalitede bültenleri dakikalar içinde oluşturun. RSS kaynaklarını seçin, Yapay zeka özetlesin ve günlük gönderimleri planlayın.",
+    "features": {
+      "ai": "Yapay zeka Özetleme",
+      "auto": "Otomatik zamanlama",
+      "instant": "Anında gönderim"
+    },
+    "buttonStart": "Ücretsiz Başla",
+    "rating": {
+      "excellent": "Mükemmel",
+      "ratedBy": "Değerlendiren",
+      "verifiedCreators": "doğrulanmış içerik üreticisi"
+    }
+  },
+  "categories": {
+    "badge": "İÇERİK KATEGORİLERİ",
+    "title": {
+      "line1": "Web'in her köşesinden",
+      "line2": "içerik toplayın"
+    },
+    "subtitle": "12 ana kategoride 100+ güvenilir kaynaktan premium içeriğe erişin",
+    "description": "Yapay zekamız, hedef kitlenize yalnızca en alakalı ve yüksek kaliteli hikayeleri sunmak için içeriği akıllıca filtreler ve sıralar",
+    "stats": {
+      "sources": "Kaynak",
+      "categories": "Kategori",
+      "updates": "Güncelleme",
+      "accuracy": "Doğruluk"
+    },
+    "cta": {
+      "text": "Tüm kategorileri keşfedin ve içerik seçiminizi özelleştirin"
+    },
+    "technology": {
+      "title": "Teknoloji",
+      "source": "TechCrunch, Wired, The Verge",
+      "quote": "Son dakika teknoloji haberleri, AI gelişmeleri ve dijital inovasyon içgörüleri"
+    },
+    "fashion": {
+      "title": "Moda & Stil",
+      "source": "Vogue, WWD, Business of Fashion",
+      "quote": "Podyum trendleri, sokak stili ve küresel modanın arkasındaki iş dünyası"
+    },
+    "health": {
+      "title": "Sağlık & Wellness",
+      "source": "Healthline, Mayo Clinic, WebMD",
+      "quote": "Kanıta dayalı sağlık haberleri, fitness trendleri ve mental sağlık içgörüleri"
+    },
+    "world": {
+      "title": "Dünya Haberleri",
+      "source": "Reuters, BBC, Associated Press",
+      "quote": "Güvenilir kaynaklardan küresel olaylar, politika ve uluslararası ilişkiler"
+    },
+    "finance": {
+      "title": "Finans & Piyasalar",
+      "source": "Bloomberg, WSJ, Financial Times",
+      "quote": "Piyasa analizleri, ekonomik trendler ve yatırım içgörüleri"
+    },
+    "education": {
+      "title": "Eğitim & Öğrenme",
+      "source": "EdWeek, Chronicle, MIT News",
+      "quote": "Eğitim teknolojisi, araştırma atılımları ve öğrenme inovasyonları"
+    },
+    "entertainment": {
+      "title": "Eğlence",
+      "source": "Variety, Hollywood Reporter, IGN",
+      "quote": "Sektör liderlerinden filmler, TV, oyun ve pop kültürü"
+    },
+    "travel": {
+      "title": "Seyahat & Turizm",
+      "source": "Lonely Planet, Travel + Leisure, CN Traveler",
+      "quote": "Destinasyonlar, seyahat ipuçları ve turizm sektörü güncellemeleri"
+    },
+    "sports": {
+      "title": "Spor",
+      "source": "ESPN, The Athletic, Sky Sports",
+      "quote": "Tüm büyük liglerden canlı skorlar, analizler ve son dakika haberleri"
+    },
+    "science": {
+      "title": "Bilim & Araştırma",
+      "source": "Nature, Science Magazine, NASA",
+      "quote": "Bilimsel keşifler, uzay araştırmaları ve araştırma atılımları"
+    }
+  },
+  "features": {
+    "badge": "TÜM ÖZELLİKLER",
+    "title1": "Seçtiğiniz Tüm Haber Akışlarını",
+    "title2": "Muhteşem Bültenlere Dönüştürün",
+    "subtitle": "Yapay zeka destekli özetleme ve otomatik teslim sistemi.",
+    "ctaHint": "Her hafta saatler kazanan binlerce içerik üreticisine katıl ✨",
+
+    "items": {
+      "ai": {
+        "title": "Yapay zeka Özetleme Motoru",
+        "description": "Akıllı, doğru ve isteklerinize uygun 100lerce farklı kategoride mükemmel ve pratik haber özetleri."
+      },
+      "curation": {
+        "title": "Akıllı Kürasyon",
+        "description": "Tekrarlayan içerikleri temizler, önemli gündemleri ve haberleri verir."
+      },
+      "design": {
+        "title": "Güzel Tasarımlar",
+        "description": "Tercihlerinize uyumlu profesyonel bülten şablonları."
+      },
+      "timer": {
+        "title": "Otomatik Zamanlama (Gün ve Saat)",
+        "description": "Otomatik zamanlama ile seçtiğin saatte sana özel oluşturulmuş haber bültenini e-mail olarak al."
+      },
+      "analytics": {
+        "title": "Analitik Panel ve Raporlama",
+        "description": "Haberlerinizi pdf olarak indirebilir veya kullanıcı hesabınızda kaydedebilirsiniz. Etkileşim ve performans takibi."
+      },
+      "send": {
+        "title": "Anında Gönderim",
+        "description": "Binlerce aboneye tek tıkla ışık hızında gönderim."
+      }
+    }
+  },
+  "howitworks": {
+    "badge": "NASIL ÇALIŞIR ?",
+
+    "title": {
+      "line1": "Haberi sizin yerinize takip eden",
+      "line2": "kişisel bülten asistanınız"
+    },
+
+    "subtitle": "Kaynaklarınızı ekleyin, kitlenizi tanımlayın, sistem sizin için otomatik olarak seçilmiş ve özetlenmiş içerikler üretsin.",
+
+    "tabs": {
+      "connect": "1. Bağlan",
+      "train": "2. Öğret",
+      "design": "3. Tasarla",
+      "automate": "4. Otomatikleştir"
+    },
+
+    "connect": {
+      "title": "Haberi tek merkezde toplayın",
+      "description": "Spor, teknoloji, bilim, kültür, finans, dünya gündemi… Farklı ilgi alanlarındaki içerikleri tek bir akışa indirerek sizi bilgi kalabalığından kurtarır.",
+      "step1": "Sevdiğiniz kaynakları, blogları ve haber sitelerini ekleyin; dilerseniz hazır kategorilerden (Teknoloji, Bilim, Spor, Dünya, Finans vb.) hızlıca seçim yapın.",
+      "step2": "Her kaynak için öncelik seviyesi belirleyin: 'Öncelikli', 'Uygun olursa', 'Düşük öncelik'. Böylece akış tam istediğiniz yoğunlukta gelir.",
+      "step3": "Sistem arka planda RSS akışlarını sürekli yeniler, bozuk, eski veya kopya içerikleri temizler; size sadece saf, güncel bir içerik havuzu bırakır.",
+      "step4": "Günün sonunda elinizde; kategorize edilmiş, filtrelenmiş ve düzenlemeye hazır tek bir içerik kuyruğu olur."
+    },
+
+    "train": {
+      "title": "Asistanınıza neyin önemli olduğunu öğretin",
+      "description": "Tek yapmanız gereken seçimlerinizi göstermek; sistem zaman içinde sizin zevklerinize ve kitlenizin ilgi seviyesine göre kendini uyarlar.",
+      "step1": "İlgilendiğiniz haberleri açtıkça, sabitledikçe veya bültende tuttuğunuzda sistem hangi temalara ağırlık vermesi gerektiğini öğrenir.",
+      "step2": "İlgisiz veya gürültü oluşturan haberleri gizleyin; benzer içerikler bir sonraki bültende daha az görünür.",
+      "step3": "Aynı konuya dair farklı kaynaklardan gelen haberler tek bir blok altında birleştirilir; böylece 5 link yerine 1 net özet görürsünüz.",
+      "step4": "Her haber kısa, anlaşılır ve hızlı okunabilir bir özetle birlikte gelir; okurlar birkaç dakikada günün tamamını anlayabilir.",
+      "step5": "Zamanla akışınız, hem ilgi alanınıza hem de hedef kitlenizin bilgi seviyesine daha iyi uyan kişisel bir haber deneyimine dönüşür."
+    },
+
+    "design": {
+      "title": "Bülteninizi marka kimliğinize göre şekillendirin",
+      "description": "Sistem, hedef kitlenize göre ton, içerik yoğunluğu ve stil ayarlarını otomatik olarak uyarlarken size yaratıcı kontrol bırakır.",
+      "step1": "Bülten iskeletini belirleyin: Öne Çıkanlar, Gündem, Derinlemesine, Hafif İçerik, Editör Notu gibi farklı bölümleri ekleyin veya yeniden sıralayın.",
+      "step2": "Kullanıcı Ayarları bölümünde; bülten adı, şirket adı, gönderici adı, gönderici e-posta adresi, açıklama ve dipnot gibi temel kimlik bilgilerini girin.",
+      "step3": "Varsayılan tonu seçin: analitik, kısa ve net, hikâye anlatımı odaklı, resmi veya sohbet havasında… Metinler bu tona göre otomatik üretilir.",
+      "step4": "Marka sesi, hedef kitle ve sektör hakkında birkaç cümle yazın; sistem tüm özetleri bu rehbere göre şekillendirir.",
+      "step5": "Her sayıya özel yorumlar, duyurular veya editöryel notlar ekleyerek bültene kendi dokunuşunuzu katabilirsiniz."
+    },
+
+    "automate": {
+      "title": "Gönderimi otomatikleştirin, akışı serbest bırakın",
+      "description": "Bir kez ayarlayın; sistem haberleri toplasın, özetlesin, derlesin ve belirlediğiniz saatlerde otomatik olarak göndersin.",
+      "step1": "Gönderim sıklığını belirleyin: günlük, haftalık veya sadece iş günleri. Sistem buna göre haberleri toplar ve hazırlar.",
+      "step2": "Gönderim saatini seçin; sistem, o saatten önce içeriği otomatik olarak oluşturur ve göndermeye hazır hale getirir.",
+      "step3": "İster otomatik gönderime izin verin, ister her sayı için gönderimden önce bülteni son kez gözden geçirin.",
+      "step4": "Her gönderi, alıcı e-postası, saat, durum ve hata bilgileriyle birlikte geçmişe kaydedilir; istediğiniz zaman inceleyebilirsiniz.",
+      "step5": "Bu verilere bakarak ritminizi, kategorilerin yoğunluğunu ve filtreleme ayarlarını kolayca optimize edebilirsiniz."
+    }
+  },
+  "testimonials": {
+    "badge": "KULLANICI YORUMLARI",
+
+    "titleLine1": "Kullanıcılarımız",
+    "titleLine2": "platform hakkında ne diyor?",
+    "subtitle": "Dünya çapındaki profesyoneller ve liderler bilgili kalmak için bizi tercih ediyor.",
+
+    "items": [
+      {
+        "quote": "Bu platform sayesinde küresel futbol gelişmelerini zahmetsizce takip edebiliyorum. Beni bilgili, odaklı tutuyor ve her gün değerli zamanımdan tasarruf etmemi sağlıyor.",
+        "name": "Cristiano Ronaldo",
+        "designation": "Al Nassr Futbolcusu",
+        "src": "/CR7.jpg"
+      },
+      {
+        "quote": "Bu araç, önemli teknoloji gelişmelerinin önünde olmamı sağlıyor. Temiz, hızlı ve yapay zekâ destekli geleceği inşa etmeye devam etmek için tam olarak ihtiyacım olan şey.",
+        "name": "Elon Musk",
+        "designation": "SpaceX & Tesla CEO'su",
+        "src": "/ElonMusk.jpg"
+      },
+      {
+        "quote": "Bu platformla dünya gündemini anında takip ediyorum. İş, siyaset, ekonomi artık hiçbir şey elimden kaçmıyor.",
+        "name": "Donald Trump",
+        "designation": "Amerika Birleşik Devletleri 45. Başkanı",
+        "src": "/Trump.avif"
+      },
+      {
+        "quote": "Medya trendleri, eğlence haberleri, kültür hepsi temiz ve hızlı AI özetleriyle bana geliyor. Bilgili kalmak hiç bu kadar kolay olmamıştı.",
+        "name": "Brad Pitt",
+        "designation": "Aktör & Yapımcı",
+        "src": "/Bradpitt.jpg"
+      }
+    ]
+  },
+  "pricing": {
+    "badge": "ABONELİK FİYATLARI",
+    "title": "Basit, şeffaf fiyatlandırma",
+    "subtitle": "Dünya çapındaki RSS kaynaklarından kendi AI destekli haber bülteninizi oluşturun — ihtiyacınıza göre plan seçin.",
+
+    "whyUpgrade": {
+      "title": "Starter’dan Pro’ya neden geçmeliyim?",
+      "cards": [
+        {
+          "title": "Daha fazla içerik, daha fazla bağlam",
+          "text": "Starter size 1 RSS kaynağı ve günlük 1 özet sağlar. Pro 3 RSS kaynağı, kategori erişimi ve günde 3 AI özeti sunar."
+        },
+        {
+          "title": "Daha güçlü AI & daha iyi tasarım",
+          "text": "Kısa özetlerden gelişmiş uzun Yapay zeka analizlerine, premium bülten şablonlarına ve daha güçlü içerik motoruna geçin."
+        },
+        {
+          "title": "Tam otomasyon & bildirimler",
+          "text": "Pro ile bültenleri otomatik hazırlatıp gönderebilir, trend uyarılarını manuel kontrol etmeden alabilirsiniz."
+        }
+      ]
+    },
+
+    "compare": {
+      "title": "Paketleri karşılaştırın",
       "features": "Özellikler",
-      "pricing": "Fiyatlandırma",
-      "demo": "Demo",
-      "login": "Giriş Yap"
+      "starter": "Starter",
+      "pro": "Pro",
+
+      "rows": [
+        { "label": "Aylık fiyat", "starter": "$7.50", "pro": "$20" },
+        {
+          "label": "RSS kaynakları",
+          "starter": "1 Adet",
+          "pro": "3 Adet"
+        },
+        {
+          "label": "Günlük Yapay zeka özetleri",
+          "starter": "Günde 1",
+          "pro": "Günde 3"
+        },
+        {
+          "label": "Yapay zeka Bülten Motoru",
+          "starter": "Temel",
+          "pro": "Gelişmiş"
+        },
+        {
+          "label": "Bülten şablonları",
+          "starter": "Temel şablonlar",
+          "pro": "Premium şablonlar"
+        },
+        {
+          "label": "Max AI özet uzunluğu",
+          "starter": "300 kelime",
+          "pro": "1000+ kelime"
+        },
+        {
+          "label": "RSS kategori erişimi",
+          "starter": "Sınırlı",
+          "pro": "Yüzlerce kategori"
+        },
+        {
+          "label": "Gösterge panelinde son makaleler",
+          "starter": "check",
+          "pro": "check"
+        },
+        {
+          "label": "Hazır olduğunda e-posta bildirimi",
+          "starter": "check",
+          "pro": "check"
+        },
+        {
+          "label": "Zamanlanmış otomasyon",
+          "starter": "minus",
+          "pro": "check"
+        },
+        { "label": "Trend haber uyarıları", "starter": "minus", "pro": "check" }
+      ]
     },
-    "banner": {
-      "title": "Yeni nesil AI destekli bülten asistanınız yayında!",
-      "description": "Günlük kişiselleştirilmiş haber özetleri — tamamen otomatik, tamamen size özel."
+
+    "faqTitle": "Sıkça Sorulan Sorular",
+    "faqs": [
+      {
+        "question": "Starter ve Pro arasındaki fark nedir?",
+        "answer": "Starter temel limitler sunar; Pro sınırsız kaynak, gelişmiş AI özetleri, otomasyon ve premium özellikler içerir."
+      },
+      {
+        "question": "Daha sonra plan değiştirebilir miyim?",
+        "answer": "Evet, istediğiniz zaman yükseltebilir veya düşürebilirsiniz."
+      },
+      {
+        "question": "Uzun süreli sözleşme var mı?",
+        "answer": "Hayır. Tüm planlar aylık ve istediğiniz zaman iptal edebilirsiniz."
+      },
+      {
+        "question": "Starter limitini aşarsam ne olur?",
+        "answer": "Yükseltme önerisi alırsınız; verileriniz asla silinmez veya kısıtlanmaz."
+      }
+    ]
+  },
+  "globe": {
+    "title": "Küresel haberler Yapay zeka tarafından seçilir, günlük teslim edilir",
+    "subtitle": "Yapay zeka dünya çapındaki haber kaynaklarını tarar, gürültüyü filtreler, önemli içgörüleri özetler ve kişisel bülteni her sabah e-postana gönderir.",
+    "badge1": "🌍 Küresel kapsama",
+    "badge2": "🤖 Yapay zeka destekli özetler",
+    "badge3": "📩 Günlük e-posta bülteni",
+
+    "leftCard": {
+      "line1": "Canlı içgörü",
+      "line2": "7/24 taranan haber kaynakları"
     },
-    "logo": "Oğuzhan"
+    "rightCard": {
+      "line1": "Etkileşim artışı",
+      "line2": "%37 daha yüksek açılma oranı"
+    }
+  },
+  "footer": {
+    "brand": {
+      "name": "GlobeBrief",
+      "description": "RSS kaynaklarınızı güzel, Yapay zeka ile düzenlenmiş bültenlere dönüştürün. Her hafta saatler kazandıran akıllı otomasyon."
+    },
+    "newsletter": {
+      "title": "Güncel Kalın",
+      "subtitle": "Ürün güncellemeleri ve ipuçları alın",
+      "button": "Abone Ol"
+    },
+    "columns": {
+      "product": {
+        "title": "Ürün",
+        "links": [
+          { "label": "Özellikler", "href": "#features" },
+          { "label": "Fiyatlandırma", "href": "#pricing" },
+          { "label": "Yapay Zeka Motoru", "href": "#" },
+          { "label": "Şablonlar", "href": "#" }
+        ]
+      },
+      "resources": {
+        "title": "Kaynaklar",
+        "links": [
+          { "label": "Dokümantasyon", "href": "#" },
+          { "label": "API Referansı", "href": "#" },
+          { "label": "Blog", "href": "#" },
+          { "label": "Yardım Merkezi", "href": "#" }
+        ]
+      },
+      "company": {
+        "title": "Şirket",
+        "links": [
+          { "label": "Hakkımızda", "href": "#" },
+          { "label": "Kariyer", "href": "#", "badge": "Alım" },
+          { "label": "İletişim", "href": "#" },
+          { "label": "Basın Kiti", "href": "#" }
+        ]
+      },
+      "legal": {
+        "title": "Yasal",
+        "links": [
+          { "label": "Gizlilik Politikası", "href": "#" },
+          { "label": "Hizmet Şartları", "href": "#" },
+          { "label": "Çerez Politikası", "href": "#" },
+          { "label": "GDPR", "href": "#" }
+        ]
+      }
+    },
+    "bottom": {
+      "crafted": "Özenle hazırlandı.",
+      "designedBy": "Tasarım ve Yapan:"
+    }
   }
-  
+}
