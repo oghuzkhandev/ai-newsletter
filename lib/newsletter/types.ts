@@ -16,6 +16,12 @@ export interface NewsletterPromptParams {
   articleCount: number;
   userInput?: string;
   settings?: UserSettings | null;
+  feeds?: Array<{
+    id: string;
+    title?: string | null;
+    url: string;
+    category?: string | null;
+  }>;
 }
 
 export interface NewsletterData {

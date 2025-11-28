@@ -2,7 +2,14 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Github, Mail, Globe, ArrowUpRight, Sparkles } from "lucide-react";
+import {
+  Github,
+  Mail,
+  Globe,
+  ArrowUpRight,
+  Sparkles,
+} from "lucide-react";
+import type { ComponentType, SVGProps } from "react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -132,9 +139,21 @@ export default function Footer() {
 
           {/* Social Icons */}
           <div className="flex items-center gap-2">
-            <SocialIcon icon={Github} href="https://github.com/oghuzkhandev" label="GitHub" />
-            <SocialIcon icon={Mail} href="mailto:oguzhandogandev@hotmail.com" label="Email" />
-            <SocialIcon icon={Globe} href="https://oguzhandogan.com" label="Website" />
+            <SocialIcon
+              icon={Github}
+              href="https://github.com/oghuzkhandev"
+              label="GitHub"
+            />
+            <SocialIcon
+              icon={Mail}
+              href="mailto:oguzhandogandev@hotmail.com"
+              label="Email"
+            />
+            <SocialIcon
+              icon={Globe}
+              href="https://oguzhandogan.com"
+              label="Website"
+            />
           </div>
 
           {/* Designer Credit */}
@@ -155,13 +174,14 @@ export default function Footer() {
   );
 }
 
-/* -------- Social Icon Component -------- */
+type IconType = ComponentType<SVGProps<SVGSVGElement>>;
+
 function SocialIcon({
   icon: Icon,
   href,
   label,
 }: {
-  icon: React.ElementType;
+  icon: IconType;
   href: string;
   label: string;
 }) {

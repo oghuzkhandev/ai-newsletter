@@ -5,23 +5,31 @@ import { ClerkProvider } from "@clerk/nextjs";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
-  subsets: ["latin"]
+  subsets: ["latin"],
 });
+
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
-  subsets: ["latin"]
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
   title: "GlobeBrief",
-  description: "AI Newsletter is a platform for creating and managing your newsletter"
+  description:
+    "AI Newsletter is a platform for creating and managing your newsletter",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <html suppressHydrationWarning>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
           {children}
         </body>
       </html>

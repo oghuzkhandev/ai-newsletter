@@ -20,7 +20,7 @@ interface VortexProps {
 export const Vortex = (props: VortexProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef(null);
-  const animationFrameId = useRef<number>();
+  const animationFrameId = useRef<number | null>(null);
   const particleCount = props.particleCount || 700;
   const particlePropCount = 9;
   const particlePropsLength = particleCount * particlePropCount;
@@ -111,7 +111,7 @@ export const Vortex = (props: VortexProps) => {
     renderToScreen(canvas, ctx);
 
     animationFrameId.current = window.requestAnimationFrame(() =>
-      draw(canvas, ctx),
+      draw(canvas, ctx)
     );
   };
 
@@ -170,7 +170,7 @@ export const Vortex = (props: VortexProps) => {
     ttl: number,
     radius: number,
     hue: number,
-    ctx: CanvasRenderingContext2D,
+    ctx: CanvasRenderingContext2D
   ) => {
     ctx.save();
     ctx.lineCap = "round";
@@ -190,7 +190,7 @@ export const Vortex = (props: VortexProps) => {
 
   const resize = (
     canvas: HTMLCanvasElement,
-    ctx?: CanvasRenderingContext2D,
+    ctx?: CanvasRenderingContext2D
   ) => {
     const { innerWidth, innerHeight } = window;
 
@@ -203,7 +203,7 @@ export const Vortex = (props: VortexProps) => {
 
   const renderGlow = (
     canvas: HTMLCanvasElement,
-    ctx: CanvasRenderingContext2D,
+    ctx: CanvasRenderingContext2D
   ) => {
     ctx.save();
     ctx.filter = "blur(8px) brightness(200%)";
@@ -220,7 +220,7 @@ export const Vortex = (props: VortexProps) => {
 
   const renderToScreen = (
     canvas: HTMLCanvasElement,
-    ctx: CanvasRenderingContext2D,
+    ctx: CanvasRenderingContext2D
   ) => {
     ctx.save();
     ctx.globalCompositeOperation = "lighter";

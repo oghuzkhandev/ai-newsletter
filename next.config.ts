@@ -6,12 +6,12 @@ const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["images.unsplash.com"],
-  },
-
-  webpack: (config) => {
-    config.cache = false;
-    return config;
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
 };
 

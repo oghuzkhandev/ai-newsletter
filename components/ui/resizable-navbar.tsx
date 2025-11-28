@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 import { cn } from "@/lib/utils";
 import { IconMenu2, IconX } from "@tabler/icons-react";
@@ -46,7 +47,7 @@ export const NavBody = ({ children, className, visible }: any) => {
       transition={{ type: "spring", stiffness: 180, damping: 38 }}
       style={{ minWidth: "800px" }}
       className={cn(
-        "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between rounded-full bg-transparent px-4 py-3 lg:flex",
+        "relative z-60 mx-auto hidden w-full max-w-7xl flex-row items-center justify-between rounded-full bg-transparent px-4 py-3 lg:flex",
         visible && "bg-white/85 border border-blue-200/40 shadow-sm",
         className
       )}

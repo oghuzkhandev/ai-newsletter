@@ -43,7 +43,6 @@ export async function createNewsletterSchedule() {
     return { exists: true, schedule: found };
   }
 
-  // Create new schedule - runs every minute
   const schedule = await client.schedules.create({
     destination,
     cron: "* * * * *",
@@ -72,7 +71,6 @@ export async function resumeSchedule(scheduleId: string) {
   await client.schedules.resume({ schedule: scheduleId });
 }
 
-// Manual trigger
 export async function triggerNewsletterCron() {
   const client = getQStashClient();
   const baseUrl = getBaseUrl();
